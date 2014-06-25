@@ -1,0 +1,58 @@
+.col-md-12
+  .panel.panel-primary
+    .panel-heading
+      %h4.panel-title
+        = raw(@course.title + ' Course <span class="badge">' + Semester.where(id: @course.semester_id).first.title + ' Semester</span>')
+
+    .panel-body
+      .row
+        .col-md-12
+          %ul.nav.nav-tabs
+            %li.active
+              %a{href: '#general', data: {toggle: 'tab'}} General Details
+            %li
+              %a{href: '#sections', data: {toggle: 'tab'}} Sections
+
+          .tab-content
+            #general.tab-pane.active
+              .row
+                .col-md-4
+                  %p Picture of something goes here
+
+                .col-md-8
+                  %table.table.table-striped
+                    %tr
+                      %td Course Title
+                      %td= @course.title
+                    %tr
+                      %td Course Number
+                      %td= @course.number
+                    %tr
+                      %td Semester
+                      %td= Semester.where(id: @course.semester_id).first.title
+                    %tr
+                      %td Credits
+                      %td= @course.credits
+
+
+            #sections.tab-pane
+              %table.table.table-striped
+                %thead
+                  %tr
+                    %th CRN
+                    %th Capacity
+                    %th Enrolled
+                    %th Waitlist Capacity
+                    %th Waitlist Actual
+                %tbody
+                  - @course.sections.each do |section|
+                    %tr
+                      %td= section.crn
+                      %td= section.enr_cap
+                      %td= section.enr_act
+                      %td= section.wait_cap
+                      %td= section.wait_act
+
+    .panel-footer
+      = link_to 'Edit', edit_course_path(@course), class: "btn btn-primary"
+      = link_to 'Back', courses_path, class: "btn btn-default"

@@ -1,0 +1,71 @@
+= form_tag(import_courses_path, html: { role: "form" }, multipart: true) do
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        %h4 Import Data
+
+      .panel-body
+        .row
+          .col-md-6
+            .bs-example
+              %p(style="overflow: none")
+                = image_tag('spreadsheet.png', class: "img-responsive")
+              %p
+                The above image depicts an example data import file.  Be sure to setup your import spreadsheet in a
+                similar fashion using the first row of the spreadsheet as a header and then having the following
+                columns (in order):
+
+              .bs-callout.bs-callout-warning
+                %h4 Column Descriptions
+
+                %strong CRN
+                \- Course Registration Number
+                %br
+
+                %strong Course
+                \- Course Catalog Number
+                %br
+
+                %strong Cr
+                \- Number of credits
+                %br
+
+                %strong Title
+                \- Course Catalog Title
+                %br
+
+                %strong Enr cap
+                \- Enrollment Capacity
+                %br
+
+                %strong Enr
+                \- Actual Enrollment
+                %br
+
+                %strong Wait cap
+                \- Waitlist capacity
+                %br
+
+                %strong Wait count
+                \- Waitlist enrollment
+
+          .col-md-6
+            %h4(style="border-bottom: solid 1px #dcdcdc")
+              Browse for Import File
+            .bs-callout.bs-callout-info
+              %h4 Regarding Importing Data
+              Import file must be a Microsoft Excel '97 (.xls) or Microsoft Excel '07 (.xlsx) format.  Click the
+              <strong>Browse</strong> button to select your import file.  When you have selected your import file,
+              click the <strong>Import</strong> button below.
+
+            .form-group
+              .form-label Semester
+              = collection_select :course, :semester_id, Semester.all, :id, :title, { include_blank: '' }, class: "form-control"
+
+            = file_field_tag :file, class: 'file'
+
+      .panel-footer
+        = submit_tag "Import", class: "btn btn-primary"
+
+:coffee
+  $(".file").fileinput({'showUpload':false, 'previewFileType':'any'});

@@ -1,0 +1,61 @@
+.col-md-12
+  .panel.panel-primary.filterable
+    .panel-heading.clearfix
+      %h4.panel-title
+        Academic Catalogs
+      .pull-right
+        %button.btn.btn-default.btn-xs.btn-filter
+          %i.fa.fa-filter
+          Filter
+        = link_to new_catalog_path, class: 'btn btn-default btn-xs' do
+          %i.fa.fa-plus
+          New Catalog
+
+    .panel-body
+      %table.table.table-bordered.table-striped
+        %thead
+          %tr.filters
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Title"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Semesters"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Courses"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Enrolled"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Waitlsted"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Created"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Updated"}
+            %th.action-column
+              %input.form-control{type: "text", disabled: true, placeholder: "Actions"}
+
+        %tbody
+          - @catalogs.each do |catalog|
+            %tr
+              %td
+                = link_to catalog.title, edit_catalog_path(catalog)
+              %td.text-center(style="width: 125px")
+                = catalog.semesters.all.count
+              %td.text-center(style="width: 125px")
+                = catalog.total_courses
+              %td.text-center(style="width: 125px")
+                = catalog.total_enrolled
+              %td.text-center(style="width: 125px")
+                = catalog.total_waitlisted
+              %td.date-column
+                = catalog.created_at.to_formatted_s(:short)
+              %td.date-column
+                = catalog.updated_at.to_formatted_s(:short)
+              %td.action-column
+                = link_to edit_catalog_path(catalog), class: 'btn btn-default' do
+                  %i.fa.fa-edit
+
+                .btn.btn-default
+                  = link_to catalog, method: :destroy, data: { confirm: 'Are you sure?' } do
+                    %i.fa.fa-trash-o
+
+    .panel-footer
+      %p Something should go here eventually

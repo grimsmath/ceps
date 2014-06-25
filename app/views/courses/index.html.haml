@@ -1,0 +1,60 @@
+.col-md-12
+  .panel.panel-primary.filterable
+    .panel-heading.clearfix
+      %h4.panel-title
+        Courses
+      .pull-right
+        %button.btn.btn-default.btn-xs.btn-filter
+          %i.fa.fa-filter
+          Filter
+        = link_to new_course_path, class: 'btn btn-default btn-xs' do
+          %i.fa.fa-plus
+          New Course
+
+    .panel-body
+      %table.table.table-bordered.table-striped
+        %thead
+          %tr.filters
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Course"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Title"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Semester"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Created"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Updated"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Actions"}
+        %tbody
+          - @courses.each do |course|
+            %tr
+              %td(style="width: 100px")
+                = course.number
+              %td
+                = link_to course.title, course
+              %td(style="width: 150px")
+                - semester = Semester.where(id: course.semester_id).first
+                = link_to semester.title, semester
+              %td.date-column
+                = course.created_at.to_formatted_s(:short)
+              %td.date-column
+                = course.updated_at.to_formatted_s(:short)
+              %td.action-column
+                - if course.is_locked?
+                  .i.fa.fa-lock.btn.btn-default(title="Locked")
+                - else
+                  .i.fa.fa-unlock.btn.btn-default(title="Unlocked")
+
+                = link_to edit_course_path(course), class: 'btn btn-default' do
+                  %i.fa.fa-edit
+
+                .btn.btn-default
+                  = link_to course, method: :delete, data: { :confirm => 'Are you sure?' } do
+                    %i.fa.fa-trash-o
+      .text-center
+        = paginate @courses
+
+    .panel-footer
+      %p Something should go here eventually

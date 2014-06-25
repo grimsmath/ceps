@@ -1,0 +1,11 @@
+.col-md-12
+  %form{enctype: "multipart/form-data"}
+    .form-group
+      %input#file-1.file{"data-preview-file-type" => "any", multiple: "true", type: "file"}/
+    .form-group
+      %input#file-2.file{readonly: "true", type: "file"}/
+    .form-group
+      %input#file-3{multiple: "true", type: "file"}/
+    .form-group
+      %button.btn.btn-primary Submit
+      %button.btn.btn-default{type: "reset"} Reset

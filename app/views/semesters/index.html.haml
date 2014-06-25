@@ -1,0 +1,56 @@
+.col-md-12
+  .panel.panel-primary.filterable
+    .panel-heading.clearfix
+      %h4.panel-title
+        Semesters
+      .pull-right
+        %button.btn.btn-default.btn-xs.btn-filter
+          %i.fa.fa-filter
+          Filter
+        = link_to new_semester_path, class: 'btn btn-default btn-xs' do
+          %i.fa.fa-plus
+          New Semester
+
+    .panel-body
+      %table.table.table-bordered.table-striped
+        %thead
+          %tr.filters
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Title"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Catalog"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Created"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Modified"}
+            %th
+              %input.form-control{type: "text", disabled: true, placeholder: "Actions"}
+        %tbody
+          - @semesters.each do |semester|
+            %tr
+              %td{data: {id: semester.id}}
+                = link_to semester.title, semester
+              %td
+                - catalog = Catalog.where(id: semester.catalog_id).first
+                = link_to catalog.title, catalog
+              %td(style="width: 100px")
+                = semester.created_at.to_formatted_s(:short)
+              %td(style="width: 100px")
+                = semester.updated_at.to_formatted_s(:short)
+              %td.action-column
+                - if semester.is_locked?
+                  .i.fa.fa-lock.btn.btn-default(title="Locked")
+                - else
+                  .i.fa.fa-unlock.btn.btn-default(title="Unlocked")
+
+                = link_to edit_semester_path(semester), class: 'btn btn-default' do
+                  %i.fa.fa-edit
+
+                .btn.btn-default
+                  = link_to semester, method: :destroy, data: { confirm: 'Are you sure?' } do
+                    %i.fa.fa-trash-o
+      .text-center
+        = paginate @semesters
+
+    .panel-footer
+      %p Something should go here eventually
