@@ -1,0 +1,19 @@
+#semesters.tab-pane
+  %a#addSemester.pull-right.btn.btn-primary{href: "#", data: {toggle: 'modal', target: '#modal-semester'}}
+    %i.fa.fa-plus
+      Add Semester
+
+  %table.table.table-bordered.table-striped
+    %thead
+      %tr
+        %th
+          Semester Title
+        %th(style="width: 100px; text-align: center")
+          Actions
+    %tbody
+      - @catalog.semesters.each do |semester|
+        %tr
+          %td
+            = semester.title
+          %td
+            Something

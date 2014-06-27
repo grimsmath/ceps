@@ -1,0 +1,25 @@
+= form_for(@catalog, html: { :role => "form" }) do |f|
+  .col-md-12
+    .panel.panel-primary
+      .panel-heading
+        %h4.panel-title
+          = @catalog.title
+
+      .panel-body
+        %ul.nav.nav-tabs
+          %li.active
+            %a{href: '#general', data: {toggle: 'tab'}} General Details
+          %li
+            %a{href: '#semesters', data: {toggle: 'tab'}} Semesters
+          %li
+            %a{href: '#courses', data: {toggle: 'tab'}} Courses
+
+        .tab-content
+          = render 'catalogs/partials/generalTab', f: f
+          = render 'catalogs/partials/semestersTab', f: f
+          = render 'catalogs/partials/coursesTab', f: f
+
+      .panel-footer
+        = f.submit 'Save', class: 'btn btn-primary'
+        .pull-right
+          = f.check_box :is_locked
