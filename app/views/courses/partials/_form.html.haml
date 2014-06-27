@@ -1,0 +1,40 @@
+= nested_form_for(@course, html: { :role => "form" }) do |f|
+  .col-md-12
+    .panel.panel-primary
+      .panel-heading
+        - if @course.semester_id.nil?
+          %h4.panel-title
+            New Course
+        - else
+          %h4.panel-title
+            = raw(@course.title + " <span class=\"badge\">" + Semester.where(id: @course.semester_id).first.title + " Course</span>")
+
+      .panel-body
+        = render 'courses/partials/notice'
+
+        %ul.nav.nav-tabs
+          %li.active
+            %a{href: '#general-tab', data: {toggle: 'tab'}}
+              General Details
+          %li
+            %a{href: '#sections-tab', data: {toggle: 'tab'}}
+              Sections
+          %li
+            %a{href: '#requirements-tab', data: {toggle: 'tab'}}
+              Requirements
+
+        .tab-content
+          = render 'courses/partials/generalTab', locals: { f: f }
+          = render 'courses/partials/sectionsTab', locals: { f: f }
+          = render 'courses/partials/requirementsTab', locals: { f: f }
+
+      .panel-footer
+        = f.submit 'Save', class: 'btn btn-primary'
+        = link_to 'Back to Courses', courses_path, class: 'btn btn-default'
+        .pull-right
+          = f.check_box :is_locked
+
+:coffee
+  $("#course_is_locked").bootstrapSwitch
+    onText: "LOCKED"
+    offText: "UNLOCKED"

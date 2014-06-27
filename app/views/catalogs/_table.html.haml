@@ -1,0 +1,36 @@
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Title
+      %th Semesters
+      %th Courses
+      %th Enrolled
+      %th Waitlsted
+      %th Created
+      %th Updated
+      %th.action-column
+        Actions
+  %tbody
+    - @catalogs.each do |catalog|
+      %tr
+        %td
+          = link_to catalog.title, edit_catalog_path(catalog)
+        %td
+          = catalog.semesters.all.count
+        %td
+          = catalog.total_courses
+        %td
+          = catalog.total_enrolled
+        %td
+          = catalog.total_waitlisted
+        %td.date-column
+          = catalog.created_at.to_formatted_s(:short)
+        %td.date-column
+          = catalog.updated_at.to_formatted_s(:short)
+        %td.action-column
+          = link_to edit_catalog_path(catalog), class: 'btn btn-default btn-xs' do
+            %i.fa.fa-edit
+
+          .btn.btn-default.btn-xs
+            = link_to catalog, method: :destroy, data: { confirm: 'Are you sure?' } do
+              %i.fa.fa-trash-o

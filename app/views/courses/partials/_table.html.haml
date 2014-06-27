@@ -1,0 +1,36 @@
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Course
+      %th Title
+      %th Semester
+      %th Created
+      %th Updated
+      %th.action-column
+        Actions
+  %tbody
+    - @courses.each do |course|
+      %tr
+        %td(style="width: 100px")
+          = course.number
+        %td
+          = link_to course.title, course
+        %td(style="width: 150px")
+          - semester = Semester.where(id: course.semester_id).first
+          = link_to semester.title, semester
+        %td.date-column
+          = course.created_at.to_formatted_s(:short)
+        %td.date-column
+          = course.updated_at.to_formatted_s(:short)
+        %td.action-column
+          - if course.is_locked?
+            .i.fa.fa-lock.btn.btn-default.btn-xs(title="Locked")
+          - else
+            .i.fa.fa-unlock.btn.btn-default.btn-xs(title="Unlocked")
+
+          = link_to edit_course_path(course), class: 'btn btn-default btn-xs' do
+            %i.fa.fa-edit
+
+          .btn.btn-default.btn-xs
+            = link_to course, method: :delete, data: { :confirm => 'Are you sure?' } do
+              %i.fa.fa-trash-o

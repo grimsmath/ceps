@@ -1,0 +1,52 @@
+#sections-tab.tab-pane
+  .row(style="margin-top: 10px")
+    .col-md-12
+      %table#sections.table.table-striped.table-condensed
+        %thead
+          %tr(style="border-bottom: solid 2px #999")
+            %th CRN
+            %th Enrollment Cap
+            %th Enrollment Act
+            %th Waitlist Cap
+            %th Waitlist Act
+            %th Passed
+            %th.action-column
+              Actions
+        %tbody
+          = f.fields_for :sections, :wrapper => false do |section_form|
+            %tr.fields
+              %td
+                = section_form.text_field :crn, class: 'form-control input-sm'
+              %td
+                = section_form.text_field :enr_cap, class: 'form-control input-sm'
+              %td
+                = section_form.text_field :enr_act, class: 'form-control input-sm'
+              %td
+                = section_form.text_field :wait_cap, class: 'form-control input-sm'
+              %td
+                = section_form.text_field :wait_act, class: 'form-control input-sm'
+              %td
+                = section_form.text_field :passed, class: 'form-control input-sm'
+              %td.text-center
+                = section_form.link_to_remove class: 'btn btn-default btn-xs' do
+                  %i.fa.fa-trash-o
+
+        = f.link_to_add :sections, class: 'btn btn-primary btn-xs pull-right', data: { target: '#sections' } do
+          %i.fa.fa-plus
+          Add Section
+
+:coffee
+  $('#course_credits').TouchSpin
+    verticalbuttons: true
+
+  $('#course_enr_cap').TouchSpin
+    verticalbuttons: true
+
+  $('#course_enr_act').TouchSpin
+    verticalbuttons: true
+
+  $('#course_wait_cap').TouchSpin
+    verticalbuttons: true
+
+  $('#course_wait_act').TouchSpin
+    verticalbuttons: true

@@ -16,38 +16,35 @@
 
         .tab-content
           #general.tab-pane.active
-            .badger-left{data: {badger: "General Details"}}
-              .form-group
-                = f.label :title, class: 'form-label'
-                = f.text_field :title, class: 'form-control'
+            .form-group
+              = f.label :title, class: 'form-label'
+              = f.text_field :title, class: 'form-control'
 
-              .form-group
-                = f.label :web_link, class: 'form-label'
-                = f.text_field :web_link, class: 'form-control'
+            .form-group
+              = f.label :web_link, class: 'form-label'
+              = f.text_field :web_link, class: 'form-control'
 
           #semesters.tab-pane
-            .badger-left{data: {badger: "Semester Details"}}
-              %a.pull-right{href: "#", id: 'addSemester', class: 'btn btn-primary', data: {toggle: 'modal', target: '#modal-semester'}}
-                %i.fa.fa-plus
-                  Add Semester
+            %a#addSemester.pull-right.btn.btn-primary{href: "#", data: {toggle: 'modal', target: '#modal-semester'}}
+              %i.fa.fa-plus
+                Add Semester
 
-              %table.table.table-bordered.table-striped
-                %thead
+            %table.table.table-bordered.table-striped
+              %thead
+                %tr
+                  %th
+                    Semester Title
+                  %th(style="width: 100px; text-align: center")
+                    Actions
+              %tbody
+                - @catalog.semesters.each do |semester|
                   %tr
-                    %th
-                      Semester Title
-                    %th(style="width: 100px; text-align: center")
-                      Actions
-                %tbody
-                  - @catalog.semesters.each do |semester|
-                    %tr
-                      %td
-                        = semester.title
-                      %td
-                        Something
+                    %td
+                      = semester.title
+                    %td
+                      Something
 
           #courses.tab-pane
-            .badger-left{data: {badger: "Course Details"}}
 
       .panel-footer
         = f.submit 'Save', class: 'btn btn-primary'

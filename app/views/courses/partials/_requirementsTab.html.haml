@@ -1,0 +1,29 @@
+#requirements-tab.tab-pane
+  -# Only show the following block if the course has already been persisted to the DB
+  - if @course.persisted?
+    .row(style="margin-top: 10px")
+      .col-md-12
+        %table#requirements.table.table-striped.table-condensed
+          %thead
+            %tr(style="border-bottom: solid 2px #999")
+              %th Requirement Course Title
+              %th.text-center(style="width: 150px") Is Co-requirement
+              %th.action-column Actions
+          %tbody
+            = f.fields_for :requirements, :wrapper => false do |req_form|
+              %tr.fields
+                %td
+                  = req_form.collection_select :course_id, Course.by_semester(@course.semester_id), :number, :name_with_number, { include_blank: '' }, class: "form-control input-sm"
+                %td.text-center(style="width: 150px")
+                  = req_form.check_box :corequirement
+                %td.text-center
+                  = req_form.link_to_remove class: 'btn btn-default btn-xs' do
+                    %i.fa.fa-trash-o
+
+          = f.link_to_add :requirements, class: 'btn btn-primary btn-xs pull-right', data: { target: '#requirements' } do
+            %i.fa.fa-plus
+            Add Requirement
+  - else
+    .bs-callout.bs-callout-warning
+      %h4 Course Requirements
+      Please complete the course details and save the course before adding any requirements
