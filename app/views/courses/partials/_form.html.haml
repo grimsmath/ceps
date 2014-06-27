@@ -24,9 +24,9 @@
               Requirements
 
         .tab-content
-          = render 'courses/partials/generalTab', locals: { f: f }
-          = render 'courses/partials/sectionsTab', locals: { f: f }
-          = render 'courses/partials/requirementsTab', locals: { f: f }
+          = render 'courses/partials/generalTab', f: f
+          = render 'courses/partials/sectionsTab', f: f
+          = render 'courses/partials/requirementsTab', f: f
 
       .panel-footer
         = f.submit 'Save', class: 'btn btn-primary'
