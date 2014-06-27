@@ -16,43 +16,91 @@
           .tab-content
             #general.tab-pane.active
               .row
-                .col-md-4
-                  %p Picture of something goes here
+                .col-md-7
+                  .bs-callout.bs-callout-info
+                    %h4 Course Details
+                    %table.table.table-striped
+                      %tr
+                        %td.strong Course Title
+                        %td= @course.title
+                      %tr
+                        %td.strong Course Number
+                        %td= @course.number
+                      %tr
+                        %td.strong Semester
+                        %td= Semester.where(id: @course.semester_id).first.title
+                      %tr
+                        %td.strong Credits
+                        %td= @course.credits
+                      %tr
+                        %td.strong Course Catalog Entry
+                        %td
+                          - if @course.url.nil? || @course.url == ''
+                            %p No link provided
+                          - else
+                            = link_to @course.url, target: "blank" do
+                              = @course.url + " "
+                              %i.fa.fa-external-link
 
-                .col-md-8
-                  %table.table.table-striped
-                    %tr
-                      %td Course Title
-                      %td= @course.title
-                    %tr
-                      %td Course Number
-                      %td= @course.number
-                    %tr
-                      %td Semester
-                      %td= Semester.where(id: @course.semester_id).first.title
-                    %tr
-                      %td Credits
-                      %td= @course.credits
+                .col-md-5
+                  .bs-callout.bs-callout-info
+                    %h4 Course Description
+                    %p= @course.description
 
 
             #sections.tab-pane
-              %table.table.table-striped
-                %thead
-                  %tr
-                    %th CRN
-                    %th Capacity
-                    %th Enrolled
-                    %th Waitlist Capacity
-                    %th Waitlist Actual
-                %tbody
-                  - @course.sections.each do |section|
-                    %tr
-                      %td= section.crn
-                      %td= section.enr_cap
-                      %td= section.enr_act
-                      %td= section.wait_cap
-                      %td= section.wait_act
+              .bs-callout.bs-callout-warning
+                %h4 Course Sections
+                %table.table.table-striped
+                  %thead
+                    %tr(style="border-top: solid 2px #888")
+                      %th CRN
+                      %th(style="width: 16%") Capacity
+                      %th(style="width: 16%") Enrolled
+                      %th(style="width: 16%") Waitlist Capacity
+                      %th(style="width: 16%") Waitlist Actual
+                      %th(style="width: 16%") Passed
+                  %tbody
+                    - @course.sections.each do |section|
+                      %tr
+                        %td= section.crn
+                        %td= section.enr_cap
+                        %td= section.enr_act
+                        %td= section.wait_cap
+                        %td= section.wait_act
+                        %td= section.passed
+                  -# Only show the footer with stats if there are stats to show
+                  - if @course.sections.nil? || @course.sections.count > 0
+                    %tfoot(style="border-top: solid 2px #888")
+                      %tr
+                        %td.strong.text-right Totals
+                        %td= @course.sections.sum(:enr_cap)
+                        %td= @course.sections.sum(:enr_act)
+                        %td= @course.sections.sum(:wait_cap)
+                        %td= @course.sections.sum(:wait_act)
+                        %td= @course.sections.sum(:passed)
+                      %tr
+                        %td.strong.text-right Averages
+                        %td= @course.sections.avg(:enr_cap).ceil
+                        %td= @course.sections.avg(:enr_act).ceil
+                        %td= @course.sections.avg(:wait_cap).ceil
+                        %td= @course.sections.avg(:wait_act).ceil
+                        %td= @course.sections.avg(:passed).ceil
+                      %tr
+                        %td.strong.text-right Maximums
+                        %td= @course.sections.max(:enr_cap)
+                        %td= @course.sections.max(:enr_act)
+                        %td= @course.sections.max(:wait_cap)
+                        %td= @course.sections.max(:wait_act)
+                        %td= @course.sections.max(:passed)
+                      %tr
+                        %td.strong.text-right Minimums
+                        %td= @course.sections.min(:enr_cap)
+                        %td= @course.sections.min(:enr_act)
+                        %td= @course.sections.min(:wait_cap)
+                        %td= @course.sections.min(:wait_act)
+                        %td= @course.sections.min(:passed)
 
     .panel-footer
       = link_to 'Edit', edit_course_path(@course), class: "btn btn-primary"
-      = link_to 'Back', courses_path, class: "btn btn-default"
+      = link_to 'Back to Courses', courses_path, class: "btn btn-default"

@@ -21,7 +21,6 @@
 @import "badger";
 @import "jquery.bootstrap-touchspin";
 @import "docs";
-@import "filterable";
 @import "spinner";
 @import "bootstrap-switch";
 
@@ -41,4 +40,13 @@ body {
 
 .date-column {
   width: 100px;
+}
+
+.strong {
+  font-weight: bold
+}
+
+.pagination {
+  padding: 0;
+  margin: 0;
 }

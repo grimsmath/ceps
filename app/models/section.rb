@@ -7,4 +7,5 @@ class Section < Content
   field :enr_act,   type: Integer,  default: 0
   field :wait_cap,  type: Integer,  default: 0
   field :wait_act,  type: Integer,  default: 0
+  field :passed,    type: Integer,  default: 0
 end

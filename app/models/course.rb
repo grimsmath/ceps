@@ -14,17 +14,15 @@ class Course
   embeds_many :requirements, cascade_callbacks: true
   accepts_nested_attributes_for :requirements, :allow_destroy => true
 
-  field :title,     type: String,   default: ""
-  field :number,    type: String,   default: ""
-  field :credits,   type: Integer,  default: 0
-  field :is_locked, type: Boolean,  default: false
+  field :title,       type: String,   default: ""
+  field :number,      type: String,   default: ""
+  field :description, type: String,   default: ""
+  field :credits,     type: Integer,  default: 0
+  field :url,         type: String,   default: ""
+  field :is_locked,   type: Boolean,  default: false
 
   scope :by_semester, -> (semester_id) { where(semester_id: semester_id) }
   scope :by_number, -> (number) { where(number: number) }
-
-  def self.accessible_attributes
-    [:title, :number, :credits]
-  end
 
   def self.unique_courses
     map = %Q{
@@ -59,8 +57,10 @@ class Course
     "#{number} - #{title}"
   end
 
-  def self.import(file, semester_id)
+  def self.import(file, semester_id, worksheet_id)
     spreadsheet = open_spreadsheet(file)
+
+    spreadsheet.default_sheet = spreadsheet.sheets[worksheet_id]
 
     # accommodate the header
     header = spreadsheet.row(1)
@@ -97,6 +97,7 @@ class Course
       when ".csv" then Roo::Csv.new(file.path, nil, :ignore)
       when ".xls" then Roo::Excel.new(file.path, nil, :ignore)
       when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
+      else raise "Unknown file type: #{file.original_filename}"
     end
   end
 end

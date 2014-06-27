@@ -17,8 +17,8 @@
 //= require jasny-bootstrap
 //= require bootbox
 //= require fileinput
-//= require filterable
 //= require jquery_nested_form
 //= require jquery.bootstrap-touchspin
 //= require bootstrap-switch
+//= require holder
 

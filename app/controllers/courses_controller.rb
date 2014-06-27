@@ -62,7 +62,7 @@ class CoursesController < ApplicationController
   end
 
   def import
-    Course.import(params[:file], params[:course][:semester_id])
+    Course.import(params[:file], params[:course][:semester_id], params[:worksheet][:worksheet_id].to_i)
     redirect_to courses_path, notice: "Data imported."
   end
 
@@ -74,8 +74,8 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:title, :crn, :number, :credits, :is_locked, :semester_id,
-                                     sections_attributes: [:id, :crn, :enr_act, :enr_cap, :wait_cap, :wait_act, :_destroy],
+      params.require(:course).permit(:title, :crn, :number, :credits, :is_locked, :semester_id, :description, :url,
+                                     sections_attributes: [:id, :crn, :enr_act, :enr_cap, :wait_cap, :wait_act, :passed, :_destroy],
                                      requirements_attributes: [:id, :course_id, :corequirement, :_destroy])
     end
 end

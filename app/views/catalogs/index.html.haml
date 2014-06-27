@@ -1,61 +1,52 @@
 .col-md-12
-  .panel.panel-primary.filterable
+  .panel.panel-primary
     .panel-heading.clearfix
-      %h4.panel-title
+      %h4.panel-title.pull-left
         Academic Catalogs
       .pull-right
-        %button.btn.btn-default.btn-xs.btn-filter
-          %i.fa.fa-filter
-          Filter
         = link_to new_catalog_path, class: 'btn btn-default btn-xs' do
           %i.fa.fa-plus
           New Catalog
 
     .panel-body
-      %table.table.table-bordered.table-striped
+      %table.table.table-striped.table-hover
         %thead
-          %tr.filters
-            %th
-              %input.form-control{type: "text", disabled: true, placeholder: "Title"}
-            %th
-              %input.form-control{type: "text", disabled: true, placeholder: "Semesters"}
-            %th
-              %input.form-control{type: "text", disabled: true, placeholder: "Courses"}
-            %th
-              %input.form-control{type: "text", disabled: true, placeholder: "Enrolled"}
-            %th
-              %input.form-control{type: "text", disabled: true, placeholder: "Waitlsted"}
-            %th
-              %input.form-control{type: "text", disabled: true, placeholder: "Created"}
-            %th
-              %input.form-control{type: "text", disabled: true, placeholder: "Updated"}
+          %tr
+            %th Title
+            %th Semesters
+            %th Courses
+            %th Enrolled
+            %th Waitlsted
+            %th Created
+            %th Updated
             %th.action-column
-              %input.form-control{type: "text", disabled: true, placeholder: "Actions"}
-
+              Actions
         %tbody
           - @catalogs.each do |catalog|
             %tr
               %td
                 = link_to catalog.title, edit_catalog_path(catalog)
-              %td.text-center(style="width: 125px")
+              %td
                 = catalog.semesters.all.count
-              %td.text-center(style="width: 125px")
+              %td
                 = catalog.total_courses
-              %td.text-center(style="width: 125px")
+              %td
                 = catalog.total_enrolled
-              %td.text-center(style="width: 125px")
+              %td
                 = catalog.total_waitlisted
               %td.date-column
                 = catalog.created_at.to_formatted_s(:short)
               %td.date-column
                 = catalog.updated_at.to_formatted_s(:short)
               %td.action-column
-                = link_to edit_catalog_path(catalog), class: 'btn btn-default' do
+                = link_to edit_catalog_path(catalog), class: 'btn btn-default btn-xs' do
                   %i.fa.fa-edit
 
-                .btn.btn-default
+                .btn.btn-default.btn-xs
                   = link_to catalog, method: :destroy, data: { confirm: 'Are you sure?' } do
                     %i.fa.fa-trash-o
+      .pull-right
+        = paginate @catalogs
 
     .panel-footer
-      %p Something should go here eventually
+      = link_to 'Dashboard', root_path, class: 'btn btn-default'

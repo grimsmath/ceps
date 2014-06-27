@@ -16,13 +16,13 @@ User.create(email: 'david.king@unf.edu', first_name: 'David', last_name: 'King',
 # Catalogs
 # =============================================
 Catalog.destroy_all()
-catalog01 = Catalog.create(title: '2009-2010 Academic Calendar')
-catalog02 = Catalog.create(title: '2010-2011 Academic Calendar')
-catalog03 = Catalog.create(title: '2011-2012 Academic Calendar')
-catalog04 = Catalog.create(title: '2012-2013 Academic Calendar')
-catalog05 = Catalog.create(title: '2013-2014 Academic Calendar')
-catalog06 = Catalog.create(title: '2014-2015 Academic Calendar')
-catalog07 = Catalog.create(title: '2015-2016 Academic Calendar')
+catalog01 = Catalog.create(title: '2009-2010 Academic Catalog')
+catalog02 = Catalog.create(title: '2010-2011 Academic Catalog')
+catalog03 = Catalog.create(title: '2011-2012 Academic Catalog')
+catalog04 = Catalog.create(title: '2012-2013 Academic Catalog')
+catalog05 = Catalog.create(title: '2013-2014 Academic Catalog')
+catalog06 = Catalog.create(title: '2014-2015 Academic Catalog')
+catalog07 = Catalog.create(title: '2015-2016 Academic Catalog')
 
 # =============================================
 # Catalogs
@@ -60,6 +60,7 @@ sem21 = Semester.create(title: 'Summer 2016',   catalog_id: catalog07.id)
 # Courses
 # =============================================
 Course.destroy_all()
+
 # c01 = Course.create(title: 'Introduction Computer Hardware',
 #                     number: 'CDA3101',
 #                     credits: 4,

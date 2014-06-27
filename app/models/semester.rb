@@ -9,5 +9,4 @@ class Semester
 
   field :title,       type: String,   default: ""
   field :is_locked,   type: Boolean,  default: false
-
 end

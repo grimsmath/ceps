@@ -43,9 +43,6 @@ gem 'bcrypt', '~> 3.1.7'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-# jQuery datatables
-gem 'data_tables', '~> 0.1.19'
-
 # Use devise for authentication
 # https://github.com/plataformatec/devise
 gem 'devise'
@@ -82,6 +79,13 @@ gem 'font-awesome-sass'
 gem 'nested_form'
 gem 'simple_form'
 
+# https://github.com/jasondew/data_table
+gem 'data_table', '~> 0.4.13'
+
 # Used for pagination
 # https://github.com/amatsuda/kaminari
 gem 'kaminari'
+
+# image placeholder
+# https://github.com/narkoz/holder_rails
+gem 'holder_rails'
