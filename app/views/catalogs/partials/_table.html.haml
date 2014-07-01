@@ -11,7 +11,7 @@
       %th.action-column
         Actions
   %tbody
-    - @catalogs.each do |catalog|
+    - @catalogs.order_by([:title, :desc]).each do |catalog|
       %tr
         %td
           = link_to catalog.title, catalog_path(catalog)

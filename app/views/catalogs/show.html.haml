@@ -2,10 +2,52 @@
   .panel.panel-primary
     .panel-heading
       %h4.panel-title
-        Catalog
+        = @catalog.title
 
     .panel-body
-      %p something should go here
+      .row
+        .col-md-12
+          %ul.nav.nav-tabs
+            %li.active
+              %a{href: '#general-tab', data: {toggle: 'tab'}} General Details
+            %li
+              %a{href: '#semesters-tab', data: {toggle: 'tab'}} Semesters
+
+          .tab-content
+            #general-tab.tab-pane.active
+              .row
+                .col-md-7
+                  .bs-callout.bs-callout-info
+                    %h4 Catalog Details
+                    %table.table.table-striped
+                      %tr
+                        %td.strong Catalog Title
+                        %td= @catalog.title
+                      %tr
+                        %td.strong # of Semesters
+                        %td= @catalog.semesters.count
+
+                .col-md-5
+                  .bs-callout.bs-callout-info
+
+            #semesters-tab.tab-pane
+              .bs-callout.bs-callout-warning
+                %h4 Catalog Semesters
+                %table.table.table-striped
+                  %thead
+                    %tr(style="border-top: solid 2px #888")
+                      %th Title
+                      %th # of Courses
+                      %th Created
+                      %th Updated
+                  %tbody
+                    - @catalog.semesters.each do |semester|
+                      %tr
+                        %td= link_to semester.title, semester_path(semester)
+                        %td= semester.courses.count
+                        %td= semester.created_at.to_formatted_s(:short)
+                        %td= semester.updated_at.to_formatted_s(:short)
 
     .panel-footer
-      %p something should go here as well
+      = link_to 'Edit', edit_catalog_path(@catalog), class: "btn btn-primary"
+      = link_to 'Back to Catalogs', catalogs_path, class: "btn btn-default"
