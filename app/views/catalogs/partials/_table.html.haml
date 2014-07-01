@@ -14,7 +14,7 @@
     - @catalogs.each do |catalog|
       %tr
         %td
-          = link_to catalog.title, edit_catalog_path(catalog)
+          = link_to catalog.title, catalog_path(catalog)
         %td
           = catalog.semesters.all.count
         %td
@@ -28,9 +28,12 @@
         %td.date-column
           = catalog.updated_at.to_formatted_s(:short)
         %td.action-column
-          = link_to edit_catalog_path(catalog), class: 'btn btn-default btn-xs' do
+          = link_to catalog_path(catalog), class: 'btn btn-default btn-xs' do
             %i.fa.fa-edit
 
           .btn.btn-default.btn-xs
             = link_to catalog, method: :destroy, data: { confirm: 'Are you sure?' } do
               %i.fa.fa-trash-o
+
+.pull-right
+  = paginate @catalogs

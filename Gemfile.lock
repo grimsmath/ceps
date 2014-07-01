@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: 50b633c8baf2fa467e8c36b18a013a2cd50e0454
+  revision: e01daa73623520716d62b7513bda10e978e0d583
   specs:
     mongoid (4.0.0)
       activemodel (~> 4.0)
@@ -62,7 +62,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
-    execjs (2.2.0)
+    execjs (2.2.1)
     font-awesome-sass (4.1.0)
       sass (~> 3.2)
     haml (4.0.5)
@@ -92,8 +92,8 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.6.0)
     minitest (5.3.5)
-    mongoid-tree (1.0.4)
-      mongoid (>= 3.0, <= 4.0)
+    mongoid-tree (2.0.0)
+      mongoid (>= 4.0, <= 5.0)
     moped (2.0.0)
       bson (~> 2.2)
       connection_pool (~> 2.0)

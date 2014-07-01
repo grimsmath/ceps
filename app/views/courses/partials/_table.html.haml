@@ -34,3 +34,6 @@
           .btn.btn-default.btn-xs
             = link_to course, method: :delete, data: { :confirm => 'Are you sure?' } do
               %i.fa.fa-trash-o
+
+.pull-right
+  = paginate @courses

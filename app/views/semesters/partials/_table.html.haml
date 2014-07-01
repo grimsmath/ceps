@@ -1,0 +1,36 @@
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Title
+      %th Catalog
+      %th Created
+      %th Modified
+      %th.action-column
+        Actions
+  %tbody
+    - @semesters.each do |semester|
+      %tr
+        %td
+          = link_to semester.title, semester
+        %td
+          - catalog = Catalog.where(id: semester.catalog_id).first
+          = link_to catalog.title, catalog
+        %td
+          = semester.created_at.to_formatted_s(:short)
+        %td
+          = semester.updated_at.to_formatted_s(:short)
+        %td.action-column
+          - if semester.is_locked?
+            .i.fa.fa-lock.btn.btn-xs.btn-default(title="Locked")
+          - else
+            .i.fa.fa-unlock.btn.btn-xs.btn-default(title="Unlocked")
+
+          = link_to edit_semester_path(semester), class: 'btn btn-default btn-xs' do
+            %i.fa.fa-edit
+
+          .btn.btn-default.btn-xs
+            = link_to semester, method: :destroy, data: { confirm: 'Are you sure?' } do
+              %i.fa.fa-trash-o
+
+.pull-right
+  = paginate @semesters

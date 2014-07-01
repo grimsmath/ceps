@@ -1,10 +1,54 @@
 .col-md-12
   .panel.panel-primary
     .panel-heading
-      %h4= @semester.title + ' Semester'
+      %h4.panel-title
+        = raw(@semester.title + ' Semester <span class="badge">' + Catalog.where(id: @semester.catalog_id).first.title + '</span>')
 
     .panel-body
+      .row
+        .col-md-12
+          %ul.nav.nav-tabs
+            %li.active
+              %a{href: '#general-tab', data: {toggle: 'tab'}} General Details
+            %li
+              %a{href: '#courses-tab', data: {toggle: 'tab'}} Courses
+
+          .tab-content
+            #general-tab.tab-pane.active
+              .row
+                .col-md-7
+                  .bs-callout.bs-callout-info
+                    %h4 Semester Details
+                    %table.table.table-striped
+                      %tr
+                        %td.strong Semester Title
+                        %td= @semester.title
+                      %tr
+                        %td.strong Catalog
+                        - catalog = Catalog.where(id: @semester.catalog_id).first
+                        %td= link_to catalog.title, catalog_path(catalog)
+                      %tr
+                        %td.strong # of Courses
+                        %td= @semester.courses.count
+
+                .col-md-5
+
+            #courses-tab.tab-pane
+              .bs-callout.bs-callout-warning
+                %h4 Semester Courses
+                %table.table.table-striped
+                  %thead
+                    %tr(style="border-top: solid 2px #888")
+                      %th(style="width: 15%") Course Number
+                      %th Course Title
+                      %th(style="width: 16%") # of Sections
+                  %tbody
+                    - @semester.courses.order_by([:number, :asc]).each do |course|
+                      %tr
+                        %td= link_to course.number, course_path(course)
+                        %td= link_to course.title, course_path(course)
+                        %td= course.sections.count
 
     .panel-footer
       = link_to 'Edit', edit_semester_path(@semester), class: "btn btn-primary"
-      = link_to 'Back', semesters_path, class: "btn btn-default"
+      = link_to 'Back to Semesters', semesters_path, class: "btn btn-default"
