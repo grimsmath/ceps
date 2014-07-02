@@ -7,6 +7,8 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  include ZeroOidFix
+
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :first_name,         type: String, default: ""

@@ -91,7 +91,7 @@ GEM
       bson (~> 2.2)
       connection_pool (~> 2.0)
       optionable (~> 0.2.0)
-    multi_json (1.10.1)
+    multi_json (1.5.1)
     nested_form (0.3.2)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
@@ -127,7 +127,7 @@ GEM
       rubyzip
       spreadsheet (> 0.6.4)
     ruby-ole (1.2.11.7)
-    rubyzip (1.1.4)
+    rubyzip (1.1.6)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -186,6 +186,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mongoid (~> 4.0.0)
+  multi_json (= 1.5.1)
   nested_form
   pundit
   rails (= 4.1.0.rc2)
