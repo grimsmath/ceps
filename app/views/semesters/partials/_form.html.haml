@@ -29,10 +29,3 @@
       .panel-footer
         = f.submit 'Save', class: 'btn btn-primary'
         = link_to 'Back to listing', semesters_path, class: 'btn btn-default'
-        .pull-right
-          = f.check_box :is_locked
-
-:coffee
-  $("#semester_is_locked").bootstrapSwitch
-    onText: "LOCKED"
-    offText: "UNLOCKED"

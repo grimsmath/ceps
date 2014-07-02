@@ -31,10 +31,3 @@
       .panel-footer
         = f.submit 'Save', class: 'btn btn-primary'
         = link_to 'Back to Courses', courses_path, class: 'btn btn-default'
-        .pull-right
-          = f.check_box :is_locked
-
-:coffee
-  $("#course_is_locked").bootstrapSwitch
-    onText: "LOCKED"
-    offText: "UNLOCKED"

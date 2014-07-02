@@ -1,5 +1,5 @@
 .col-md-12
-  .panel.panel-primary
+  .panel.panel-success
     .panel-heading
       %h4.panel-title
         = raw(@course.title + ' Course <span class="badge">' + Semester.where(id: @course.semester_id).first.title + ' Semester</span>')
@@ -102,5 +102,5 @@
                         %td= @course.sections.min(:passed)
 
     .panel-footer
+      = link_to 'Back to Courses', courses_path, class: "btn btn-success"
       = link_to 'Edit', edit_course_path(@course), class: "btn btn-primary"
-      = link_to 'Back to Courses', courses_path, class: "btn btn-default"

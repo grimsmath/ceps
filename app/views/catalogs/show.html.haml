@@ -1,5 +1,5 @@
 .col-md-12
-  .panel.panel-primary
+  .panel.panel-success
     .panel-heading
       %h4.panel-title
         = @catalog.title
@@ -50,4 +50,4 @@
 
     .panel-footer
       = link_to 'Edit', edit_catalog_path(@catalog), class: "btn btn-primary"
-      = link_to 'Back to Catalogs', catalogs_path, class: "btn btn-default"
+      = link_to 'Back to Catalogs', catalogs_path, class: "btn btn-success"

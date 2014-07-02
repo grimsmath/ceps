@@ -1,10 +1,10 @@
 .col-md-12
-  .panel.panel-primary
+  .panel.panel-info
     .panel-heading.clearfix
       %h4.panel-title.pull-left
         Semesters
       .pull-right
-        = link_to new_semester_path, class: 'btn btn-default btn-xs' do
+        = link_to new_semester_path, class: 'btn btn-primary btn-xs' do
           %i.fa.fa-plus
           New Semester
 
@@ -15,4 +15,4 @@
       = render 'semesters/partials/table'
 
     .panel-footer
-      = link_to 'Dashboard', root_path, class: 'btn btn-default'
+      = link_to 'Dashboard', root_path, class: 'btn btn-success'

@@ -1,5 +1,5 @@
 .col-md-12
-  .panel.panel-primary
+  .panel.panel-success
     .panel-heading
       %h4.panel-title
         = raw(@semester.title + ' Semester <span class="badge">' + Catalog.where(id: @semester.catalog_id).first.title + '</span>')
