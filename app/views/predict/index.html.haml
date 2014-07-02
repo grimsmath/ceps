@@ -1,10 +1,14 @@
 .col-md-12
-  .panel.panel-default
+  .panel.panel-danger
     .panel-heading
       %h4 Predict Enrollment
 
     .panel-body
-      %p Form goes here
+      .col-md-4.bs-callout.bs-callout-warning
+        %h4 Options
+
+      .col-md-8.bs-callout.bs-callout-info
+        %h4 Results
 
     .panel-footer
-      %p Footer goes here
+      = link_to 'Dashboard', root_path, class: 'btn btn-success'

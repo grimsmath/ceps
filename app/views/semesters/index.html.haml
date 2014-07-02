@@ -12,7 +12,8 @@
       .form-group
         = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search"
 
-      = render 'semesters/partials/table'
+      %semesters
+        = render 'semesters/partials/table'
 
     .panel-footer
       = link_to 'Dashboard', root_path, class: 'btn btn-success'
