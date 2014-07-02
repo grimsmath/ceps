@@ -21,8 +21,21 @@ class Course
   field :url,         type: String,   default: ""
   field :is_locked,   type: Boolean,  default: false
 
+  after_create :inc_catalog_course_count
+  after_destroy :dec_catalog_course_count
+
   scope :by_semester, -> (semester_id) { where(semester_id: semester_id) }
   scope :by_number, -> (number) { where(number: number) }
+
+  def inc_catalog_course_count
+    catalog = Catalog.where(id: Semester.where(id: semester_id).first.catalog_id).first
+    catalog.inc(course_count: 1)
+  end
+
+  def dec_catalog_course_count
+    catalog = Catalog.where(id: Semester.where(id: semester_id).first.catalog_id).first
+    catalog.inc(course_count: -1)
+  end
 
   def self.unique_courses
     map = %Q{

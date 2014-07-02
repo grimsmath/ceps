@@ -16,12 +16,14 @@ class Semester
     end
   end
 
-  def inc_course_count
+  def inc_course_count(course)
+    p course.title + ' inc_course_count called'
     catalog = Catalog.where(id: catalog_id).first
     catalog.inc(course_count: 1)
   end
 
-  def dec_course_count
+  def dec_course_count(course)
+    p course.title + ' dec_course_count called'
     catalog = Catalog.where(id: catalog_id).first
     catalog.inc(course_count: -1)
   end
