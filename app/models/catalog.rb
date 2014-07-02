@@ -6,17 +6,19 @@ class Catalog
 
   has_many :semesters
 
-  field :title,     type: String,   default: ""
-  field :web_link,  type: String,   default: ""
-  field :is_locked, type: Boolean,  default: false
+  field :title,         type: String,   default: ""
+  field :web_link,      type: String,   default: ""
+  field :is_locked,     type: Boolean,  default: false
+  field :course_count,  type: Integer,  default: 0
 
   def total_courses
-    counter = 0
-    semesters.each do |s|
-      counter += Course.where(semester_id: s.id).all.count
-    end
+    return course_count
 
-    return counter
+    # counter = 0
+    # semesters.each do |s|
+    #   counter += Course.where(semester_id: s.id).all.count
+    # end
+    #
   end
 
   def total_enrolled
@@ -43,5 +45,4 @@ class Catalog
     #
     # return waitlisted
   end
-
 end

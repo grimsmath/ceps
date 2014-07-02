@@ -65,12 +65,12 @@ gem 'bootstrap-generators', '~> 3.1.1'
 gem 'roo'
 
 # MongoDB ODM Support
-gem 'mongoid', github: 'mongoid/mongoid'
+gem 'mongoid', "~> 4.0.0"#, github: 'mongoid/mongoid'
 
 # Use for tree like structure in categories
 # https://github.com/benedikt/mongoid-tree
 # http://benediktdeicke.com/mongoid-tree/
-gem 'mongoid-tree', :require => 'mongoid/tree'
+# gem 'mongoid-tree', :require => 'mongoid/tree'
 
 # Font Awesome icons for SASS
 gem 'font-awesome-sass'

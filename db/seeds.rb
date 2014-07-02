@@ -13,6 +13,11 @@ User.destroy_all()
 User.create(email: 'david.king@unf.edu', first_name: 'David', last_name: 'King', password: 'password')
 
 # =============================================
+# Courses
+# =============================================
+Course.destroy_all()
+
+# =============================================
 # Catalogs
 # =============================================
 Catalog.destroy_all()
@@ -56,53 +61,3 @@ sem19 = Semester.create(title: 'Fall 2015',     catalog_id: catalog07.id)
 sem20 = Semester.create(title: 'Spring 2016',   catalog_id: catalog07.id)
 sem21 = Semester.create(title: 'Summer 2016',   catalog_id: catalog07.id)
 
-# =============================================
-# Courses
-# =============================================
-Course.destroy_all()
-
-# c01 = Course.create(title: 'Introduction Computer Hardware',
-#                     number: 'CDA3101',
-#                     credits: 4,
-#                     is_locked: false,
-#                     semester_id: sem14.id,
-#                     sections: [
-#                       {
-#                         crn: 10001,
-#                         enr_cap: 50,
-#                         enr_act: 43,
-#                         wait_cap: 10,
-#                         wait_act: 0
-#                       },
-#                       {
-#                         crn: 10002,
-#                         enr_cap: 50,
-#                         enr_act: 40,
-#                         wait_cap: 10,
-#                         wait_act: 0
-#                       }
-#                     ])
-#
-# c02 = Course.create(title: 'Software Engineering',
-#                     number: 'CEN4010',
-#                     credits: 3,
-#                     is_locked: false,
-#                     semester_id: sem14.id)
-#
-# c03 = Course.create(title: 'Engineering of Software II',
-#                     number: 'CEN6017',
-#                     credits: 3,
-#                     is_locked: false,
-#                     semester_id: sem14.id)
-#
-# c04 = Course.create(title: 'Computer Applications for Busi',
-#                     number: 'CGS1100',
-#                     credits: 3,
-#                     is_locked: false,
-#                     semester_id: sem14.id)
-#
-# c05 = Course.create(title: 'Microcomputer Applica Software',
-#                     number: 'CGS1570',
-#                     credits: 3,
-#                     is_locked: false,
-#                     semester_id: sem14.id)
