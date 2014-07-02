@@ -12,7 +12,7 @@
     - @courses.each do |course|
       %tr
         %td(style="width: 100px")
-          = course.number
+          = link_to course.number, course
         %td
           = link_to course.title, course
         %td(style="width: 150px")
