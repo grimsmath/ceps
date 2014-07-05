@@ -1,14 +1,118 @@
 .col-md-12
-  .panel.panel-danger
-    .panel-heading
-      %h4 Predict Enrollment
+  %h4.lead.well
+    Predict Enrollment
 
-    .panel-body
-      .col-md-4.bs-callout.bs-callout-warning
-        %h4 Options
+.col-md-12
+  .acc-wizard
+    .col-md-3.well
+      %ol.acc-wizard-sidebar
+        %li.acc-wizard-todo
+          %a{href: '#semester'}
+            Select Current Semester
+        %li.acc-wizard-todo
+          %a{href: '#courses'}
+            Select Courses
+        %li.acc-wizard-todo
+          %a{href: '#date'}
+            Select Date Range
+        %li.acc-wizard-todo
+          %a{href: '#review'}
+            Review Selection
+        %li.acc-wizard-todo
+          %a{href: '#finish'}
+            Run Prediction
 
-      .col-md-8.bs-callout.bs-callout-info
-        %h4 Results
+    .col-md-9
+      #accordion.panel-group
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a{href: "#semester", data: {toggle: "collapse", parent: "#accordion"}}
+                STEP 1: Select Current Semester
 
-    .panel-footer
-      = link_to 'Dashboard', root_path, class: 'btn btn-success'
+          #semester.panel-collapse.collapse.in
+            .panel-body
+              %form(id="select-semester")
+                .form-group
+                  = select("semester", "semester_id", Semester.all.collect {|p| [ p.title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
+
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a{href: "#courses", data: {toggle: "collapse", parent: "#accordion"}}
+                STEP 2: Select Courses
+
+          #courses.panel-collapse.collapse.in
+            .panel-body
+              %form(id="select-courses")
+                .row
+                  .col-md-5
+                    .form-group
+                      %label.form-label Available Courses
+                      %select#course-select.form-control{multiple: 'true', size: '10'}
+
+                  .col-md-2
+                    %div(style="margin-top: 40px")
+                      %button.btn.btn-block.btn-big.btn-primary
+                        Select
+                        %i.fa.fa-angle-right
+
+                      %button.btn.btn-block.btn-big.btn-warning
+                        Select All
+                        %i.fa.fa-angle-double-right
+
+                      %button.btn.btn-block.btn-big.btn-primary
+                        %i.fa.fa-angle-left
+                        Deselect
+
+                      %button.btn.btn-block.btn-big.btn-warning
+                        %i.fa.fa-angle-double-left
+                        Deselect All
+
+                  .col-md-5
+                    .form-group
+                      %label.form-label Selected Courses
+                      %select#course-dest.form-control{multiple: 'true', size: '10'}
+
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a{href: "#date", data: {toggle: "collapse", parent: "#accordion"}}
+                STEP 3: Select Courses
+
+          #date.panel-collapse.collapse.in
+            .panel-body
+              %form(id="select-date")
+
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a{href: "#review", data: {toggle: "collapse", parent: "#accordion"}}
+                STEP 4: Review Selections
+
+          #review.panel-collapse.collapse.in
+            .panel-body
+              %form(id="review-selections")
+
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a{href: "#finish", data: {toggle: "collapse", parent: "#accordion"}}
+                STEP 5: Run Prediction
+
+          #finish.panel-collapse.collapse.in
+            .panel-body
+              %form(id="run-prediction")
+
+:coffee
+  onNext = (parent, panel) ->
+    hash = "#" + panel.id;
+    $(".acc-wizard-sidebar",$(parent))
+        .children("li")
+        .children("a[href='" + hash + "']")
+        .parent("li")
+        .removeClass("acc-wizard-todo")
+        .addClass("acc-wizard-completed");
+
+  $(".acc-wizard").accwizard
+    onNext: onNext

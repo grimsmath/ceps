@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get 'importer' => 'importer#index'
   get 'predict' => 'predict#index'
+  get 'courses_by_semester/:id' => 'courses#by_semester'
+  get 'all_courses' => 'courses#all_courses'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

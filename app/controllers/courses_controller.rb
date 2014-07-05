@@ -6,8 +6,17 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     @courses = Course.page params[:page]
+  end
 
-    #@courses = Course.search(params[:search, :field]).page(params[:page])
+  def by_semester
+    p params[:id]
+    @courses = Course.where(semester_id: params[:id]).only(:number, :title)
+    render :json => @courses
+  end
+
+  def all_courses
+    @courses = Course.only(:number, :title)
+    render :json => @courses
   end
 
   # GET /courses/1
