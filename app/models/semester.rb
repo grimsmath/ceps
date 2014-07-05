@@ -9,6 +9,7 @@ class Semester
 
   field :title,       type: String,   default: ""
   field :is_locked,   type: Boolean,  default: false
+  field :year,        type: Integer,  default: ""
 
   def total_sections
     courses.each do |course|

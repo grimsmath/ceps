@@ -2,7 +2,8 @@
   %thead
     %tr
       %th Title
-      %th Catalog
+      %th Calendar Year
+      %th Catalog/Schedule
       %th Created
       %th Modified
       %th.action-column
@@ -12,6 +13,8 @@
       %tr
         %td
           = link_to semester.title, semester
+        %td
+          = semester.year
         %td
           - catalog = Catalog.where(id: semester.catalog_id).first
           = link_to catalog.title, catalog

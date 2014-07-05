@@ -2,7 +2,7 @@
   .panel.panel-success
     .panel-heading
       %h4.panel-title
-        = raw(@semester.title + ' Semester <span class="badge">' + Catalog.where(id: @semester.catalog_id).first.title + '</span>')
+        = raw(@semester.title + ' ' + @semester.year.to_s + ' Semester <span class="badge">' + Catalog.where(id: @semester.catalog_id).first.title + '</span>')
 
     .panel-body
       .row
@@ -24,7 +24,10 @@
                         %td.strong Semester Title
                         %td= @semester.title
                       %tr
-                        %td.strong Catalog
+                        %td.strong Calendar Year
+                        %td= @semester.year
+                      %tr
+                        %td.strong Catalog/Schedule
                         - catalog = Catalog.where(id: @semester.catalog_id).first
                         %td= link_to catalog.title, catalog_path(catalog)
                       %tr
