@@ -1,0 +1,40 @@
+#wizard-predict.wizard{data: {title: "Course Enrollment Prediction Wizard"}}
+  %h1 Define Prediction
+
+  .wizard-card{data: {cardname: 'card-intro'}}
+    %h3 Introduction
+    .wizard-input-section
+      Something
+
+  .wizard-card{data: {cardname: 'card-semester'}}
+    %h3 Select Current Semester
+    .wizard-input-section
+      Something
+
+  .wizard-card{data: {cardname: 'card-courses'}}
+    %h3 Select Courses
+    .wizard-input-section
+      Something
+
+  .wizard-card{data: {cardname: 'card-date-range'}}
+    %h3 Define Date Range
+    .wizard-input-section
+      Something
+
+  .wizard-card{data: {cardname: 'card-review'}}
+    %h3 Review Selection
+    .wizard-input-section
+      Something
+
+  .wizard-card{data: {cardname: 'card-run'}}
+    %h3 Run Prediction
+    .wizard-input-section
+      Something
+
+:coffee
+  wizard = $('#wizard-predict').wizard
+    contentHeight: 500
+    contentWidth: 800
+    backdrop: 'static'
+
+  wizard.show()

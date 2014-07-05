@@ -1,0 +1,53 @@
+.col-md-12
+  .panel.panel-primary
+    .panel-heading
+      %h4.panel-title
+        Test Prediction
+
+    .panel-body
+      .row
+        .col-md-12
+          .center-block
+            %ul.nav.nav-pills.nav-wizard
+              %li.active
+                %a{href: "#tab-semester", data: {toggle: "tab"}}
+                  Current Semester
+                .nav-arrow
+              %li
+                .nav-wedge
+                %a{href: "#tab-courses", data: {toggle: "tab"}}
+                  Select Courses
+                .nav-arrow
+              %li
+                .nav-wedge
+                %a{href: "#tab-date-range", data: {toggle: "tab"}}
+                  Select Date Range
+                .nav-arrow
+              %li
+                .nav-wedge
+                %a{href: "#tab-review", data: {toggle: "tab"}}
+                  Review Selection
+                .nav-arrow
+              %li
+                .nav-wedge
+                %a{href: "#tab-run", data: {toggle: "tab"}}
+                  Run Prediction
+
+      .tab-content
+        #tab-semester.tab-pane.active
+          Semester selection tab
+
+        #tab-courses.tab-pane
+          Courses selection tab
+
+        #tab-date-range.tab-pane
+          Date range selection tab
+
+        #tab-review.tab-pane
+          Review tab
+
+        #tab-run.tab-pane
+          Run tab
+
+    .panel-footer
+      %p something should go here

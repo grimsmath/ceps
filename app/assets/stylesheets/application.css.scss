@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require font-awesome
+ *= require nav-pills
  *= require_tree .
  *= require_self
  */
@@ -24,7 +25,7 @@
 @import "spinner";
 @import "bootstrap-switch";
 @import "acc-wizard.min";
-@import "nav-pills.css.less";
+@import "bootstrap-wizard";
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
@@ -33,6 +34,11 @@ body {
 
 .table > tbody > tr > td {
   vertical-align: middle;
+}
+
+.col-centered{
+  float: none;
+  margin: 0 auto;
 }
 
 .action-column {
