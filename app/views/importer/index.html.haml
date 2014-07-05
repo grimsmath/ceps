@@ -9,7 +9,7 @@
           .col-md-6
             .bs-example
               %p(style="overflow: none")
-                = image_tag('spreadsheet.png', class: "img-responsive")
+                = image_tag('spreadsheet.png', class: "img-responsive center-block")
               %p
                 The above image depicts an example data import file.  Be sure to setup your import spreadsheet in a
                 similar fashion using the first row of the spreadsheet as a header and then having the following
@@ -60,7 +60,7 @@
               .col-md-6
                 .form-group
                   %label.form-label Semester
-                  = collection_select :course, :semester_id, Semester.all, :id, :title, { include_blank: '' }, class: "form-control"
+                  = collection_select :course, :semester_id, Semester.all, :id, :full_title, { include_blank: '' }, class: "form-control"
 
               .col-md-6
                 .form-group

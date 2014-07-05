@@ -11,6 +11,10 @@ class Semester
   field :is_locked,   type: Boolean,  default: false
   field :year,        type: Integer,  default: ""
 
+  def full_title
+    "#{title} " + "#{year}"
+  end
+
   def total_sections
     courses.each do |course|
       counter += course.sections.count
