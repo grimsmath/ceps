@@ -21,6 +21,44 @@ class Semester
     end
   end
 
+  def self.previous_semester(semester_id)
+    current = where(id: semester_id).first
+    year = current.year - 1
+    title = nil
+
+    case current.title
+      when 'Fall'
+        title = 'Summer'
+      when 'Spring'
+        title = 'Fall'
+      when 'Summer'
+        title = 'Spring'
+    end
+
+    previous = where(year: year).where(title: title)
+
+    return previous
+  end
+
+  def self.next_semester(semester_id)
+    current = where(id: semester_id).first
+    year = current.year + 1
+    title = nil
+
+    case current.title
+      when 'Fall'
+        title = 'Spring'
+      when 'Spring'
+        title = 'Summer'
+      when 'Summer'
+        title = 'Fall'
+    end
+
+    previous = where(year: year).where(title: title)
+
+    return previous
+  end
+
   def inc_course_count(course)
     p course.title + ' inc_course_count called'
     catalog = Catalog.where(id: catalog_id).first

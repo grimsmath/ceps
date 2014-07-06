@@ -12,12 +12,12 @@
       .col-md-12
         .form-group
           %label Select Current Semester
-          = select("current", "semester_id", Semester.order_by(:title.desc).all.collect {|p| [ p.title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
+          = select("current", "semester_id", Semester.all.collect {|p| [ p.full_title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
 
       .col-md-12
         .form-group
           %label Select Prediction Semester
-          = select("prediction", "semester_id", Semester.order_by(:title.desc).all.collect {|p| [ p.title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
+          = select("prediction", "semester_id", Semester.all.collect {|p| [ p.full_title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
 
   .wizard-card{data: {cardname: 'card-courses'}}
     %h3 Select Courses
@@ -33,12 +33,12 @@
       .col-md-12
         .form-group
           %label.form-label Starting Semester
-          = select("start", "semester_id", Semester.all.collect {|p| [ p.title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
+          = select("start", "semester_id", Semester.all.collect {|p| [ p.full_title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
 
       .col-md-12
         .form-group
           %label.form-label Ending Semester
-          = select("end", "semester_id", Semester.all.collect {|p| [ p.title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
+          = select("end", "semester_id", Semester.all.collect {|p| [ p.full_title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
 
   .wizard-card{data: {cardname: 'card-review'}}
     %h3 Review Selection
@@ -46,23 +46,28 @@
       %p You have selected the following options for the prediction scenario
       %table.table.table-striped
         %tr
-          %td <strong>Current Semester:</strong>
+          %td.strong
+            Current Semester:
           %td
             #review-current-semester
         %tr
-          %td <strong>Selected Courses:</strong>
+          %td.strong
+            Selected Courses:
           %td
             %ul#review-selected-courses(style="list-style-type: none; list-style-position: outside; margin: 0px; padding: 0px; overflow: auto")
         %tr
-          %td <strong>Starting Semester:</strong>
+          %td.strong
+            Starting Semester:
           %td
             #review-start-date
         %tr
-          %td <strong>Ending Semester:</strong>
+          %td.strong
+            Ending Semester:
           %td
             #review-end-date
         %tr
-          %td <strong>Prediction Semester:</strong>
+          %td.strong
+            Prediction Semester:
           %td
             #semester-prediction
 

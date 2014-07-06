@@ -27,6 +27,48 @@ class Course
   scope :by_semester, -> (semester_id) { where(semester_id: semester_id) }
   scope :by_number, -> (number) { where(number: number) }
 
+  def self.all_enrolled(course_number, semester_id)
+    enrolled = 0
+    where(number: course_number).where(semester_id: semester_id).each do |course|
+      course.sections.each do |section|
+        enrolled += section.enr_act
+      end
+    end
+    return enrolled
+  end
+
+  def self.all_enrolled_previous(course_number, semester_id)
+    year = Semester.where(id: semester_id).first.year
+    return year - 1
+  end
+
+  def self.all_waitlisted(course_number, semester_id)
+    waitlisted = 0
+    where(number: course_number).where(semester_id: semester_id).each do |course|
+      course.sections.each do |section|
+        waitlisted += section.wait_cap
+      end
+    end
+    return waitlisted
+  end
+
+  def self.all_passed(course_number, semester_id)
+    passing = 0
+    where(number: course_number).where(semester_id: semester_id).each do |course|
+      course.sections.each do |section|
+        passing += section.passed
+      end
+    end
+    return passing
+  end
+
+  def self.all_failed(course_number, semester_id)
+    enrolled = self.all_enrolled(course_number, semester_id)
+    passed = self.all_passed(course_number, semester_id)
+
+    return enrolled - passed
+  end
+
   def inc_catalog_course_count
     catalog = Catalog.where(id: Semester.where(id: semester_id).first.catalog_id).first
     catalog.inc(course_count: 1)

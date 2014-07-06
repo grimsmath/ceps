@@ -3,6 +3,7 @@
     %tr
       %th Course
       %th Title
+      %th # of Sections
       %th Semester
       %th Created
       %th Updated
@@ -15,9 +16,11 @@
           = link_to course.number, course
         %td
           = link_to course.title, course
+        %td
+          = course.sections.count.to_s
         %td(style="width: 150px")
           - semester = Semester.where(id: course.semester_id).first
-          = link_to semester.title, semester
+          = link_to semester.title + ' ' + semester.year.to_s, semester
         %td.date-column
           = course.created_at.to_formatted_s(:short)
         %td.date-column
