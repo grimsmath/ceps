@@ -2,19 +2,21 @@
   .panel.panel-success
     .panel-heading
       %h4.panel-title
-        = raw(@course.title + ' Course <span class="badge">' + Semester.where(id: @course.semester_id).first.title + ' Semester</span>')
+        = raw(@course.title + ' Course <span class="badge">' + Semester.where(id: @course.semester_id).first.full_title + ' Semester</span>')
 
     .panel-body
       .row
         .col-md-12
           %ul.nav.nav-tabs
             %li.active
-              %a{href: '#general', data: {toggle: 'tab'}} General Details
+              %a{href: '#general-tab', data: {toggle: 'tab'}} General Details
             %li
-              %a{href: '#sections', data: {toggle: 'tab'}} Sections
+              %a{href: '#requirements-tab', data: {toggle: 'tab'}} Requirements
+            %li
+              %a{href: '#sections-tab', data: {toggle: 'tab'}} Sections
 
           .tab-content
-            #general.tab-pane.active
+            #general-tab.tab-pane.active
               .row
                 .col-md-7
                   .bs-callout.bs-callout-info
@@ -28,7 +30,7 @@
                         %td= @course.number
                       %tr
                         %td.strong Semester
-                        %td= Semester.where(id: @course.semester_id).first.title
+                        %td= Semester.where(id: @course.semester_id).first.full_title
                       %tr
                         %td.strong Credits
                         %td= @course.credits
@@ -47,8 +49,23 @@
                     %h4 Course Description
                     %p= @course.description
 
+            #requirements-tab.tab-pane
+              %h4 Requirements
+              %table.table.table-striped
+                %thead
+                  %tr(style="border-top: solid 2px #888")
+                    %th Course Number
+                    %th Course Title
+                    %th Is Corequirement
+                %tbody
+                  - @course.requirements.each do |req|
+                    - course = Course.where(number: req.course_id).first
+                    %tr
+                      %td= link_to req.course_id, course
+                      %td= link_to course.title, course
+                      %td= req.corequirement
 
-            #sections.tab-pane
+            #sections-tab.tab-pane
               .bs-callout.bs-callout-warning
                 %h4 Course Sections
                 %table.table.table-striped

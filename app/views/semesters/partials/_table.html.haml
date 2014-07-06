@@ -9,7 +9,7 @@
       %th.action-column
         Actions
   %tbody
-    - @semesters.each do |semester|
+    - @semesters.order_by(:year.desc).each do |semester|
       %tr
         %td
           = link_to semester.title, semester
