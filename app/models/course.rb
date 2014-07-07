@@ -42,6 +42,27 @@ class Course
     return year - 1
   end
 
+  def self.all_enrolled_between(course_number, begin_semester_id, end_semester_id)
+    enrolled = 0
+
+    begin_semester = Semester.where(id: begin_semester_id).first
+    end_semester = Semester.where(id: end_semester_id).first
+
+    begin_year = begin_semester[:year]
+    end_year = end_semester[:year]
+
+    semesters = []
+    Semester.where(:year.gte => begin_year).where(:year.lte => end_year).each do |sem|
+      semesters << sem.id.to_s
+    end
+
+    where(number: course_number).any_in(semester_id: semesters).each do |course|
+      p course
+    end
+
+    return enrolled
+  end
+
   def self.all_waitlisted(course_number, semester_id)
     waitlisted = 0
     where(number: course_number).where(semester_id: semester_id).each do |course|
