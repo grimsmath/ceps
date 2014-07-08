@@ -27,6 +27,16 @@ class Course
   scope :by_semester, -> (semester_id) { where(semester_id: semester_id) }
   scope :by_number, -> (number) { where(number: number) }
 
+  def enrolled
+    enrolled = 0
+    if sections.exists? && sections.count > 0
+      sections.each do |sec|
+        enrolled += sec.enr_act
+      end
+    end
+    return enrolled
+  end
+
   def self.all_enrolled(course_number, semester_id)
     enrolled = 0
     where(number: course_number).where(semester_id: semester_id).each do |course|
@@ -43,8 +53,6 @@ class Course
   end
 
   def self.all_enrolled_between(course_number, begin_semester_id, end_semester_id)
-    enrolled = 0
-
     begin_semester = Semester.where(id: begin_semester_id).first
     end_semester = Semester.where(id: end_semester_id).first
 
@@ -53,11 +61,12 @@ class Course
 
     semesters = []
     Semester.where(:year.gte => begin_year).where(:year.lte => end_year).each do |sem|
-      semesters << sem.id.to_s
+      semesters << sem
     end
 
+    enrolled = Hash.new
     where(number: course_number).any_in(semester_id: semesters).each do |course|
-      p course
+      enrolled[course.semester_id] = course.enrolled
     end
 
     return enrolled
@@ -77,10 +86,14 @@ class Course
     passing = 0
     where(number: course_number).where(semester_id: semester_id).each do |course|
       course.sections.each do |section|
-        passing += section.passed
+        if section.passed == 0
+          passing += section.enr_act.to_f * 0.90.to_f
+        else
+          passing += section.passed
+        end
       end
     end
-    return passing
+    return passing.round(1)
   end
 
   def self.all_failed(course_number, semester_id)
