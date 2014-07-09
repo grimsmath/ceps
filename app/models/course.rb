@@ -34,6 +34,7 @@ class Course
         enrolled += sec.enr_act
       end
     end
+
     return enrolled
   end
 
@@ -44,6 +45,7 @@ class Course
         enrolled += section.enr_act
       end
     end
+
     return enrolled
   end
 
@@ -66,7 +68,7 @@ class Course
 
     enrolled = Hash.new
     where(number: course_number).any_in(semester_id: semesters).each do |course|
-      enrolled[course.semester_id] = course.enrolled
+      enrolled[course.semester_id.to_s] = course.enrolled
     end
 
     return enrolled

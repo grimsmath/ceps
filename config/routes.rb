@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'home#index'
+
   resources :users
   resources :catalogs
   resources :semesters
@@ -9,12 +10,13 @@ Rails.application.routes.draw do
     collection { post :import }
   end
 
+  scope :predict do
+    get 'wizard' => 'predict#wizard'
+  end
+
   get 'importer' => 'importer#index'
-  get 'predict' => 'predict#index'
   get 'courses_by_semester/:id' => 'courses#by_semester'
   get 'all_courses' => 'courses#all_courses'
-  get 'test' => 'predict#test'
-  get 'wizard' => 'predict#wizard'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
