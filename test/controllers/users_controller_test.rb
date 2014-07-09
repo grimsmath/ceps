@@ -5,8 +5,8 @@ class UsersControllerTest < ActionController::TestCase
     @user = users(:one)
   end
 
-  test "should get index" do
-    get :index
+  test "should get new2" do
+    get :new2
     assert_response :success
     assert_not_nil assigns(:users)
   end

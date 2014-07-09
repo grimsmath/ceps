@@ -1,10 +1,13 @@
 class PredictController < ApplicationController
   before_action :authenticate_user!
 
-  def test
+  def new2
   end
 
-  def wizard
+  def new
+  end
+
+  def edit
   end
 
   def create
@@ -13,12 +16,8 @@ class PredictController < ApplicationController
     @predict = Predict.enrollment(course, params[:semester_start_id], params[:semester_end_idß])
 
     respond_to do |format|
-      format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
+      format.html { redirect_to predicts_path, notice: 'Course prediction results generated.' }
       format.json { head :no_content }
     end
-  end
-
-  def results
-
   end
 end

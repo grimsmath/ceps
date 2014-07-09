@@ -10,11 +10,9 @@ Rails.application.routes.draw do
     collection { post :import }
   end
 
-  scope :predict do
-    get 'wizard' => 'predict#wizard'
-  end
+  resources :predict
 
-  get 'importer' => 'importer#index'
+  get 'importer' => 'importer#new2'
   get 'courses_by_semester/:id' => 'courses#by_semester'
   get 'all_courses' => 'courses#all_courses'
 
@@ -22,7 +20,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  # root 'welcome#new2'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

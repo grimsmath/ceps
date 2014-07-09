@@ -1,5 +1,3 @@
-require 'json'
-
 class Predict
 
   def self.enrollment(course, start_semester_id, end_semester_id)
