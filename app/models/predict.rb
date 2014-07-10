@@ -1,21 +1,23 @@
 class Predict
 
-  def self.enrollment(course, start_semester_id, end_semester_id)
+  def self.enrollment(course, current_semester_id, start_semester_id, end_semester_id)
     return_hash = {}
     req_enrolled = []
 
     # This array will hold all of enrollment for the course spanning the semesters, this
     # will be one of the arrays used in the prediction model
-    course_enrolled = Course.all_enrolled_between(course.number, start_semester_id, end_semester_id)
+    course_enrolled = Course.all_enrolled_between(course, start_semester_id, end_semester_id)
+
+    my_course = Course.where(number: course).and(semester_id: current_semester_id).first
 
     #
     # Next we need to get all of the pre-requisite enrollment data elements
     #
-    if course.requirements.exists?
+    if my_course.requirements.exists?
       #
       # Course has pre-reqs
       #
-      requirements = course[:requirements]
+      requirements = my_course[:requirements]
 
       requirements.each do |req|
         tmp_course = Course.where(number: req[:course_id]).first
@@ -62,14 +64,16 @@ class Predict
       # This is what we are going to return to the
       #
       return_hash = {
-        course_id: course.id.to_s,
-        course_title: course.title,
-        course_number: course.number,
+        course_id: my_course.id.to_s,
+        course_title: my_course.title,
+        course_number: my_course.number,
         course_enrollment: course_enrolled,
         course_requirements: requirements,
         prediction_dataset: prediction.to_a,
         predicted_enrollment: req_average
       }
+
+      p return_hash
     else
       #
       # Course does not have pre-reqs

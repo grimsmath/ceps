@@ -10,14 +10,19 @@ class PredictController < ApplicationController
   def edit
   end
 
-  def create
-    course = Course.where(id: params[:course])
+  def run
+    course_numbers = params[:course_select]
+    current_semester = params[:current][:semester_id]
+    start_semester = params[:start][:semester_id]
+    end_semester = params[:end][:semester_id]
 
-    @predict = Predict.enrollment(course, params[:semester_start_id], params[:semester_end_idß])
-
-    respond_to do |format|
-      format.html { redirect_to predicts_path, notice: 'Course prediction results generated.' }
-      format.json { head :no_content }
+    predict = {}
+    course_numbers.each do |number|
+      predict[number] = Predict.enrollment(number, current_semester, start_semester, end_semester)
     end
+
+    p predict
+
+    render :json => { courses: predict }.to_json
   end
 end

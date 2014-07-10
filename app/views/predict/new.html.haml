@@ -1,3 +1,27 @@
+.col-md-12
+  .panel.panel-primary
+    .panel-heading
+      %h4.panel-title
+        Prediction Results
+
+    .panel-body
+      %input#data-results{:type=>"hidden"}
+      %table#results-table.table.table-striped
+        %thead
+          %th Course ID
+          %th Course Title
+          %th Predicted Enrollment
+          %th Dataset
+        %tbody
+        %tfoot
+          %th Course ID
+          %th Course Title
+          %th Predicted Enrollment
+          %th Dataset
+
+    .panel-footer
+      %p Something should go here soon!
+
 = form_tag("/predict/run", method: "post", role: "form") do
   #wizard-predict.wizard{data: {title: "Course Enrollment Prediction Wizard"}}
     %h1 Define Prediction
@@ -63,6 +87,19 @@
         %p
           If you are satisfied with these options, click the "Submit" button below
 
+    .wizard-success
+      %h3 Review Results
+      %button#close_wizard.btn.btn-primary.btn-big
+        Click Here to View Your Results!
+
+    .wizard-error
+      %h3 Error
+      #errors
+
+    .wizard-failure
+      %h3 Prediction Failed
+      #failures
+
 :coffee
   wizard = $('#wizard-predict').wizard
     contentHeight: 500
@@ -72,26 +109,51 @@
   wizard.show()
 
   wizard.on "submit", ->
-    console.log "Wizard submit called..."
-
-    data = wizard.serialize()
-    console.log data
-
     $.ajax
       url: '/predict/run'
       type: 'POST'
-      data: data
+      data: wizard.serialize()
       dataType: 'json'
 
-      done: ->
+      success: (data, textStatus, jqXHR) ->
+        console.log data
+        $('#data-results').text(JSON.stringify(data))
+
+        text = ''
+
+        for key, value of data.courses
+          text += '<tr>'
+          text += ' <td>' + value.course_number         + '</td>'
+          text += ' <td>' + value.course_title          + '</td>'
+          text += ' <td>'
+          text += '   <table class="table table-striped">'
+          text += '     <tr>'
+          text += '       <td>Predicted Enrollment</td>'
+          text += '       <td>' + value.predicted_enrollment + '</td>'
+          text += '     </tr>'
+
+          dataset = ''
+          for key2, value2 of value.course_enrollment
+            dataset += value2 + ', '
+
+          text += ' <td>' + dataset + '</td>'
+          text += '</tr>'
+
+        $('#results-table tbody').append(text)
+
         wizard.submitSuccess()
         wizard.hideButtons()
-        wizard.updateProcessBar(0)
+        wizard.updateProgressBar(0)
 
-      fail: ->
+      error: ->
         wizard.submitFailure()
         wizard.hideButtons()
+        wizard.updateProgressBar(0)
 
+    return false
+
+  $('#close_wizard').click ->
+    wizard.close()
     return false
 
   $('#current_semester_id').change ->

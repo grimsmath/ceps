@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   resources :predict
 
+  post '/predict/run' => 'predict#run'
+
   get 'importer' => 'importer#new2'
   get 'courses_by_semester/:id' => 'courses#by_semester'
   get 'all_courses' => 'courses#all_courses'
