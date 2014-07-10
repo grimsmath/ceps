@@ -59,6 +59,10 @@ class Semester
     return previous
   end
 
+  def self.all_sorted(direction)
+    Semester.order_by(:year, direction).order_by(:title, desc)
+  end
+
   def inc_course_count(course)
     p course.title + ' inc_course_count called'
     catalog = Catalog.where(id: catalog_id).first

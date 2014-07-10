@@ -8,20 +8,18 @@
         Something
 
     .wizard-card{data: {cardname: 'card-semester'}}
-      %h3 Select Semesters
-      .wizard-input-section
-        .col-md-12
-          .form-group
-            %label Select Current Semester
-            = select("current", "semester_id", Semester.all.collect {|p| [ p.full_title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
-
-    .wizard-card{data: {cardname: 'card-courses'}}
       %h3 Select Courses
       .wizard-input-section
         .col-md-12
           .form-group
-            %label.form-label Available Courses
-            %select#course-select.form-control{multiple: 'true', size: '15'}
+            %label Select Current Semester
+            = select("current", "semester_id", Semester.desc(:year).collect {|p| [ p.full_title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
+
+        .wizard-input-section
+          .col-md-12
+            .form-group
+              %label.form-label Available Courses
+              %select#course_select.monoselect.form-control{name: 'course_select[]', multiple: 'true', size: '12'}
 
     .wizard-card{data: {cardname: 'card-date-range'}}
       %h3 Define Date Range
@@ -29,12 +27,12 @@
         .col-md-12
           .form-group
             %label.form-label Starting Semester
-            = select("start", "semester_id", Semester.all.collect {|p| [ p.full_title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
+            = select("start", "semester_id", Semester.desc(:year).collect {|p| [ p.full_title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
 
         .col-md-12
           .form-group
             %label.form-label Ending Semester
-            = select("end", "semester_id", Semester.all.collect {|p| [ p.full_title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
+            = select("end", "semester_id", Semester.desc(:year).collect {|p| [ p.full_title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
 
     .wizard-card{data: {cardname: 'card-review'}}
       %h3 Review Selection
@@ -61,16 +59,9 @@
               Ending Semester:
             %td
               #review-end-date
-          %tr
-            %td.strong
-              Prediction Semester:
-            %td
-              #semester-prediction
 
-    .wizard-card{data: {cardname: 'card-run'}}
-      %h3 Run Prediction
-      .wizard-input-section
-        Something
+        %p
+          If you are satisfied with these options, click the "Submit" button below
 
 :coffee
   wizard = $('#wizard-predict').wizard
@@ -80,17 +71,41 @@
 
   wizard.show()
 
+  wizard.on "submit", ->
+    console.log "Wizard submit called..."
+
+    data = wizard.serialize()
+    console.log data
+
+    $.ajax
+      url: '/predict/run'
+      type: 'POST'
+      data: data
+      dataType: 'json'
+
+      done: ->
+        wizard.submitSuccess()
+        wizard.hideButtons()
+        wizard.updateProcessBar(0)
+
+      fail: ->
+        wizard.submitFailure()
+        wizard.hideButtons()
+
+    return false
+
   $('#current_semester_id').change ->
     $.get '/courses_by_semester/' + $('#current_semester_id').val(), (data) ->
-      $('#course-select').empty()
+
       $('#review-current-semester').text($('#current_semester_id option:selected').text())
 
+      $('#course_select').empty()
       for e in data
         option = $('<option></option>').attr('value', e.number).text(e.number + ' - ' + e.title);
-        $("#course-select").append(option);
+        $("#course_select").append(option);
 
-  $('#course-select').change ->
-    $('#review-selected-courses').text($("#course-select option:selected").size() + ' course(s) selected')
+  $('#course_select').change ->
+    $('#review-selected-courses').text($("#course_select option:selected").size() + ' course(s) selected')
 
   $('#start_semester_id').change ->
     $('#review-start-date').text($("#start_semester_id option:selected").text())
