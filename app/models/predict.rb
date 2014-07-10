@@ -72,8 +72,6 @@ class Predict
         prediction_dataset: prediction.to_a,
         predicted_enrollment: req_average
       }
-
-      p return_hash
     else
       #
       # Course does not have pre-reqs
@@ -81,11 +79,6 @@ class Predict
     end
 
     return return_hash
-  end
-
-  protected
-  def self.remove_unwanted_data(course_data, requirements_data)
-
   end
 
   protected
