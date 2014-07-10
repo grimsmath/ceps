@@ -11,13 +11,11 @@
           %th Course ID
           %th Course Title
           %th Predicted Enrollment
-          %th Dataset
         %tbody
         %tfoot
           %th Course ID
           %th Course Title
           %th Predicted Enrollment
-          %th Dataset
 
     .panel-footer
       %p Something should go here soon!
@@ -123,20 +121,9 @@
 
         for key, value of data.courses
           text += '<tr>'
-          text += ' <td>' + value.course_number         + '</td>'
-          text += ' <td>' + value.course_title          + '</td>'
-          text += ' <td>'
-          text += '   <table class="table table-striped">'
-          text += '     <tr>'
-          text += '       <td>Predicted Enrollment</td>'
-          text += '       <td>' + value.predicted_enrollment + '</td>'
-          text += '     </tr>'
-
-          dataset = ''
-          for key2, value2 of value.course_enrollment
-            dataset += value2 + ', '
-
-          text += ' <td>' + dataset + '</td>'
+          text += ' <td>' + value.course_number  + '</td>'
+          text += ' <td>' + value.course_title + '</td>'
+          text += ' <td>' + value.predicted_enrollment + '</td>'
           text += '</tr>'
 
         $('#results-table tbody').append(text)

@@ -21,8 +21,6 @@ class PredictController < ApplicationController
       predict[number] = Predict.enrollment(number, current_semester, start_semester, end_semester)
     end
 
-    p predict
-
     render :json => { courses: predict }.to_json
   end
 end
