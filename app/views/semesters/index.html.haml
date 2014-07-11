@@ -9,12 +9,8 @@
           New Semester
 
     .panel-body
-      .col-md-12
-        = render 'partials/flash'
-
-      .col-md-12
-        %semesters
-          = render 'semesters/partials/table'
+      %semesters
+        = render 'semesters/partials/table'
 
     .panel-footer
       = link_to 'Dashboard', root_path, class: 'btn btn-success'

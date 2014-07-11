@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get 'manage' => 'home#manage'
   get 'help' => 'home#help'
 
-  get 'importer' => 'importer#new2'
+  get 'importer' => 'importer#index'
   get 'courses_by_semester/:id' => 'courses#by_semester'
   get 'all_courses' => 'courses#all_courses'
 

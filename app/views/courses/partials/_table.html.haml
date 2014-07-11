@@ -20,7 +20,10 @@
           = course.sections.count.to_s
         %td(style="width: 150px")
           - semester = Semester.where(id: course.semester_id).first
-          = link_to semester.title + ' ' + semester.year.to_s, semester
+          - unless semester.nil?
+            = link_to semester.title + ' ' + semester.year.to_s, semester
+          - else
+            Semester not defined
         %td.date-column
           = course.created_at.to_formatted_s(:short)
         %td.date-column
