@@ -17,7 +17,10 @@
           = semester.year
         %td
           - catalog = Catalog.where(id: semester.catalog_id).first
-          = link_to catalog.title, catalog
+          - unless catalog.nil?
+            = link_to catalog.title, catalog
+          - else
+            %p No catalog defined
         %td
           = semester.created_at.to_formatted_s(:short)
         %td
@@ -32,7 +35,7 @@
             %i.fa.fa-edit
 
           .btn.btn-default.btn-xs
-            = link_to semester, method: :destroy, data: { confirm: 'Are you sure?' } do
+            = link_to semester, method: :delete, data: { confirm: 'Are you sure?' } do
               %i.fa.fa-trash-o
 
 .pull-right

@@ -36,6 +36,7 @@ class CatalogsController < ApplicationController
     end
   end
 
+  # PATCH/PUT /catalogs/1
   # PATCH/PUT /catalogs/1.json
   def update
     respond_to do |format|
@@ -49,10 +50,12 @@ class CatalogsController < ApplicationController
     end
   end
 
+  # DELETE /catalogs/1
   # DELETE /catalogs/1.json
   def destroy
     @catalog.destroy
     respond_to do |format|
+      format.html { redirect_to catalogs_url, notice: 'Catalog was successfully deleted.' }
       format.json { head :no_content }
     end
   end

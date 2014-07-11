@@ -4,14 +4,15 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :users
+
   resources :catalogs
   resources :semesters
+
   resources :courses do
     collection { post :import }
   end
 
   resources :predict
-
   post '/predict/run' => 'predict#run'
 
   get 'manage' => 'home#manage'

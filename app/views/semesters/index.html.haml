@@ -9,11 +9,12 @@
           New Semester
 
     .panel-body
-      .form-group
-        = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search"
+      .col-md-12
+        = render 'partials/flash'
 
-      %semesters
-        = render 'semesters/partials/table'
+      .col-md-12
+        %semesters
+          = render 'semesters/partials/table'
 
     .panel-footer
       = link_to 'Dashboard', root_path, class: 'btn btn-success'

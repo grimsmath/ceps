@@ -9,8 +9,8 @@
           New Catalog
 
     .panel-body
-      .form-group
-        = text_field_tag :search, params[:search], class: "form-control", placeholder: "Search"
+      .col-md-12
+        = render 'partials/flash'
 
       #catalogs
         = render 'catalogs/partials/table'
