@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     collection { post :import }
   end
 
-  resources :predict
+  get '/predict' => 'predict#index'
   post '/predict/run' => 'predict#run'
 
   get 'manage' => 'home#manage'

@@ -1,15 +1,6 @@
 class PredictController < ApplicationController
   before_action :authenticate_user!
 
-  def new2
-  end
-
-  def new
-  end
-
-  def edit
-  end
-
   def run
     course_numbers = params[:course_select]
     current_semester = params[:current][:semester_id]
@@ -22,7 +13,5 @@ class PredictController < ApplicationController
     end
 
     render :json => { courses: @predict }.to_json
-
-    #format.json { render :json => { courses: @predict } }
   end
 end
