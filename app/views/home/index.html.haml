@@ -1,6 +1,50 @@
-.col-md-2
-  .well
-    %h4 Action sidebar should go here
+:css
+  .btn {
+    padding: 50px;
+  }
 
-.col-md-10
-  %h4 CEPS Dashboard goes here
+  .letter {
+    background: #777;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+  }
+
+  .word {
+    background: #ddd;
+    padding: 5px 10px;
+  }
+
+  .jumbotron h1 {
+    font-size: 3em;
+  }
+
+.jumbotron
+  .container
+    .col-md-12
+      .text-center
+        %i.fa.fa-cubes.fa-5x
+        %h1.raleway
+          <span class="letter">C</span><span class="word">ourse<span>
+          <span class="letter">E</span>nrollment <span class="letter">P</span>rediction <span class="letter">S</span>ystem
+
+.container
+  .col-md-12
+    .col-md-4
+      .text-center
+        .btn.btn-default.btn-lg.btn-block
+          %i.fa.fa-database.fa-5x
+          %h3.raleway Manage Data
+
+    .col-md-4
+      .text-center
+        .btn.btn-default.btn-lg.btn-block
+          %i.fa.fa-bullseye.fa-5x
+          %h3.raleway Predict Enrollment
+
+    .col-md-4
+      .text-center
+        .btn.btn-default.btn-lg.btn-block
+          %i.fa.fa-question-circle.fa-5x
+          %h3.raleway Get Help
+
