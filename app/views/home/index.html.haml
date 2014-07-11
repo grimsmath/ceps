@@ -1,4 +1,8 @@
 :css
+  body {
+    padding-top: 50px
+  }
+
   .btn {
     padding: 50px;
   }
@@ -26,25 +30,27 @@
         %i.fa.fa-cubes.fa-5x
         %h1.raleway
           <span class="letter">C</span><span class="word">ourse<span>
-          <span class="letter">E</span>nrollment <span class="letter">P</span>rediction <span class="letter">S</span>ystem
+          <span class="letter">E</span><span class="word">nrollment</span>
+          <span class="letter">P</span><span class="word">rediction</span>
+          <span class="letter">S</span><span class="word">ystem</span>
 
 .container
   .col-md-12
     .col-md-4
       .text-center
-        .btn.btn-default.btn-lg.btn-block
+        = link_to manage_path, class: 'btn btn-default btn-lg btn-block' do
           %i.fa.fa-database.fa-5x
           %h3.raleway Manage Data
 
     .col-md-4
       .text-center
-        .btn.btn-default.btn-lg.btn-block
+        = link_to new_predict_path, class: 'btn btn-default btn-lg btn-block' do
           %i.fa.fa-bullseye.fa-5x
           %h3.raleway Predict Enrollment
 
     .col-md-4
       .text-center
-        .btn.btn-default.btn-lg.btn-block
+        = link_to help_path, class: 'btn btn-default btn-lg btn-block' do
           %i.fa.fa-question-circle.fa-5x
           %h3.raleway Get Help
 

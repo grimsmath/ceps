@@ -1,8 +1,12 @@
 .col-md-12
   .panel.panel-primary
-    .panel-heading
-      %h4.panel-title
+    .panel-heading.clearfix
+      %h4.panel-title.pull-left
         Prediction Results
+      .pull-right
+        %a#new-prediction.btn.btn-info.btn-xs.pull-right
+          %i.fa.fa-plus
+          New Prediction
 
     .panel-body
       %input#data-results{:type=>"hidden"}
@@ -18,7 +22,7 @@
           %th Predicted Enrollment
 
     .panel-footer
-      %p Something should go here soon!
+      = link_to 'Dashboard', root_path, class: 'btn btn-success'
 
 = form_tag("/predict/run", method: "post", role: "form") do
   #wizard-predict.wizard{data: {title: "Course Enrollment Prediction Wizard"}}
@@ -104,7 +108,8 @@
     contentWidth: 900
     backdrop: 'static'
 
-  wizard.show()
+  $('#new-prediction').click ->
+    wizard.show()
 
   wizard.on "submit", ->
     $.ajax

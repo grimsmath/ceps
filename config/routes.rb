@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
   post '/predict/run' => 'predict#run'
 
+  get 'manage' => 'home#manage'
+  get 'help' => 'home#help'
+
   get 'importer' => 'importer#new2'
   get 'courses_by_semester/:id' => 'courses#by_semester'
   get 'all_courses' => 'courses#all_courses'
