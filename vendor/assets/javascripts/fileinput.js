@@ -14,6 +14,7 @@
  * Copyright: 2013, Kartik Visweswaran, Krajee.com
  * For more JQuery plugins visit http://plugins.krajee.com
  * For more Yii related demos visit http://demos.krajee.com
+ * Resave for UTF-8
  */
 (function ($) {
     var MAIN_TEMPLATE_1 = '{preview}\n' +
