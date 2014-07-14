@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
-//= require jasny-bootstrap
 //= require bootbox
 //= require fileinput
 //= require jquery_nested_form
