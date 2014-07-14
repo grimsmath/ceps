@@ -10,6 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require font-awesome
  *= require nav-pills
  *= require_tree .
  *= require_self
@@ -17,7 +18,6 @@
 
 @import "bootstrap";
 @import "jasny-bootstrap";
-@import "font-awesome";
 @import "fileinput";
 @import "badger";
 @import "jquery.bootstrap-touchspin";
