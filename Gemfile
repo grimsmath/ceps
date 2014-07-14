@@ -79,8 +79,8 @@ gem 'mongoid', "~> 4.0.0"#, github: 'mongoid/mongoid'
 # gem 'mongoid-tree', :require => 'mongoid/tree'
 
 # Font Awesome icons for SASS
-#gem 'font-awesome-sass'
-gem "font-awesome-rails"
+gem 'font-awesome-sass'
+#gem "font-awesome-rails"
 
 # Use R Bates Nested Form to allow for multiple models manipulated in single view
 gem 'nested_form'
