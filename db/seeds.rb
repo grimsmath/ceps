@@ -13,11 +13,6 @@ User.destroy_all()
 User.create(email: 'david.king@unf.edu', first_name: 'David', last_name: 'King', password: 'password')
 
 # =============================================
-# Courses
-# =============================================
-Course.destroy_all()
-
-# =============================================
 # Catalogs
 # =============================================
 Catalog.destroy_all()
@@ -27,7 +22,6 @@ catalog03 = Catalog.create(title: '2011-2012 Academic Catalog')
 catalog04 = Catalog.create(title: '2012-2013 Academic Catalog')
 catalog05 = Catalog.create(title: '2013-2014 Academic Catalog')
 catalog06 = Catalog.create(title: '2014-2015 Academic Catalog')
-catalog07 = Catalog.create(title: '2015-2016 Academic Catalog')
 
 # =============================================
 # Catalogs
@@ -57,7 +51,7 @@ sem16 = Semester.create(title: 'Fall 2014',     catalog_id: catalog06.id)
 sem17 = Semester.create(title: 'Spring 2015',   catalog_id: catalog06.id)
 sem18 = Semester.create(title: 'Summer 2015',   catalog_id: catalog06.id)
 
-sem19 = Semester.create(title: 'Fall 2015',     catalog_id: catalog07.id)
-sem20 = Semester.create(title: 'Spring 2016',   catalog_id: catalog07.id)
-sem21 = Semester.create(title: 'Summer 2016',   catalog_id: catalog07.id)
-
+# =============================================
+# Courses
+# =============================================
+Course.destroy_all()
