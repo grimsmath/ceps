@@ -1,0 +1,33 @@
+= stylesheet_link_tag 'home'
+
+.jumbotron
+  .container
+    .col-md-12
+      .text-center
+        %i.fa.fa-cubes.fa-5x
+        %h1.raleway
+          <span class="letter">M</span><span class="word">anage</span>
+          <span class="letter">P</span><span class="word">rediction</span>
+          <span class="letter">D</span><span class="word">ata</span>
+
+.container
+  .col-md-12
+    .col-md-4
+      .text-center
+        = link_to courses_path, class: 'btn btn-default btn-lg btn-block' do
+          %i.fa.fa-book.fa-5x
+          %h3.raleway Manage Courses
+
+    .col-md-4
+      .text-center
+        = link_to semesters_path, class: 'btn btn-default btn-lg btn-block' do
+          %i.fa.fa-calendar-o.fa-5x
+          %h3.raleway Manage Semesters
+
+    .col-md-4
+      .text-center
+        = link_to catalogs_path, class: 'btn btn-default btn-lg btn-block' do
+          %i.fa.fa-calendar.fa-5x
+          %h3.raleway Manage Catalogs
+
+

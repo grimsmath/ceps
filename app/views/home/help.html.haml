@@ -1,0 +1,35 @@
+= stylesheet_link_tag 'home'
+
+.jumbotron
+  .container
+    .col-md-12
+      .text-center
+        %i.fa.fa-cubes.fa-5x
+        %h1.raleway
+          <span class="letter">H</span><span class="word">elp<span>
+          <span class="letter">U</span><span class="word">sing</span>
+          <span class="letter">P</span><span class="word">rediction</span>
+          <span class="letter">S</span><span class="word">ystem</span>
+
+.container
+  .col-md-12
+    .col-md-4
+      .text-center
+        = link_to manage_path, class: 'btn btn-default btn-lg btn-block' do
+          %i.fa.fa-database.fa-5x
+          %h3.raleway
+            Managing Data
+
+    .col-md-4
+      .text-center
+        = link_to predict_path, class: 'btn btn-default btn-lg btn-block' do
+          %i.fa.fa-bullseye.fa-5x
+          %h3.raleway
+            Running Predictions
+
+    .col-md-4
+      .text-center
+        = link_to predict_path, class: 'btn btn-default btn-lg btn-block' do
+          %i.fa.fa-bullseye.fa-5x
+          %h3.raleway
+            Administering System

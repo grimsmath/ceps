@@ -60,6 +60,12 @@
             %label.form-label Ending Semester
             = select("end", "semester_id", Semester.desc(:year).collect {|p| [ p.full_title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
 
+    .wizard-card{data: {cardname: 'card-course-weight'}}
+      %h3 Weight Course Requirements
+      .wizard-input-section
+        .col-md-12
+          %p Something should go here
+
     .wizard-card{data: {cardname: 'card-review'}}
       %h3 Review Selection
       .wizard-input-section
