@@ -5,6 +5,7 @@ class Catalog
   paginates_per 10
 
   has_many :semesters
+  has_many :templates
 
   embeds_many :templates, cascade_callbacks: true
   accepts_nested_attributes_for :templates, :allow_destroy => true

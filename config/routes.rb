@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :catalogs
+  resources :templates
   resources :semesters
 
   resources :courses do

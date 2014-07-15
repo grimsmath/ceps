@@ -1,0 +1,27 @@
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Course Number
+      %th Created
+      %th Updated
+      %th.action-column
+        Actions
+  %tbody
+    - @templates.order_by([:course_number]).each do |template|
+      %tr
+        %td
+          = link_to template.course_title, template_path(template)
+        %td.date-column
+          = template.created_at.to_formatted_s(:short)
+        %td.date-column
+          = template.updated_at.to_formatted_s(:short)
+        %td.action-column
+          = link_to template_path(template), class: 'btn btn-default btn-xs' do
+            %i.fa.fa-edit
+
+          .btn.btn-default.btn-xs
+            = link_to template, method: :delete, data: { confirm: 'Are you sure you want to delete the catalog?' } do
+              %i.fa.fa-trash-o
+
+.pull-right
+  = paginate @templates

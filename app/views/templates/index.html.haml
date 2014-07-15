@@ -1,17 +1,16 @@
-%h1 Listing templates
+.col-md-12
+  .panel.panel-info
+    .panel-heading.clearfix
+      %h4.panel-title.pull-left
+        Course Templates
+      .pull-right
+        = link_to new_template_path, class: 'btn btn-primary btn-xs' do
+          %i.fa.fa-plus
+          New Course Template
 
-%table
-  %tr
-    %th
-    %th
-    %th
+    .panel-body
+      #catalogs
+        = render 'templates/partials/table'
 
-  - @templates.each do |template|
-    %tr
-      %td= link_to 'Show', template
-      %td= link_to 'Edit', edit_template_path(template)
-      %td= link_to 'Destroy', template, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Template', new_template_path
+    .panel-footer
+      = link_to 'Dashboard', root_path, class: 'btn btn-success'

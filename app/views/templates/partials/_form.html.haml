@@ -1,0 +1,23 @@
+= nested_form_for(@template, html: { :role => "form" }) do |f|
+  .col-md-12
+    .panel.panel-primary
+      .panel-heading
+        - if @template.catalog_id.nil?
+          %h4.panel-title
+            New Course Template
+        - else
+          %h4.panel-title
+            = raw(template.course_title + " <span class=\"badge\">" + Catalog.where(id: @template.catalog_id).first.title + " Course</span>")
+
+      .panel-body
+        .form-group
+          = f.label :course_number, class: 'form-label'
+          = f.text_field :course_number, class: 'form-control'
+
+        .form-group
+          = f.label :course_title, class: 'form-label'
+          = f.text_field :course_title, class: 'form-control'
+
+      .panel-footer
+        = f.submit 'Save', class: 'btn btn-primary'
+        = link_to 'Back to Templates', templates_path, class: 'btn btn-default'
