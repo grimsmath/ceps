@@ -6,6 +6,9 @@ class Catalog
 
   has_many :semesters
 
+  embeds_many :templates, cascade_callbacks: true
+  accepts_nested_attributes_for :templates, :allow_destroy => true
+
   field :title,         type: String,   default: ""
   field :web_link,      type: String,   default: ""
   field :is_locked,     type: Boolean,  default: false

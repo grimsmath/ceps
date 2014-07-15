@@ -48,6 +48,23 @@
                         %td= semester.created_at.to_formatted_s(:short)
                         %td= semester.updated_at.to_formatted_s(:short)
 
+            #templates-tab.tab-pane
+              .bs-callout.bs-callout-success
+                %table.table.table-striped
+                  %thead
+                    %tr(style="border-top: solid 2px #888")
+                      %th Course Title
+                      %th Course Number
+                      %th Created
+                      %th Updated
+                  %tbody
+                    - @catalog.templates.each do |template|
+                      %tr
+                        %td= template.course_title
+                        %td= template.course_number
+                        %td= template.created_at.to_formatted_s(:short)
+                        %td= template.updated_at.to_formatted_s(:short)
+
     .panel-footer
       = link_to 'Edit', edit_catalog_path(@catalog), class: "btn btn-primary"
       = link_to 'Back to Catalogs', catalogs_path, class: "btn btn-success"

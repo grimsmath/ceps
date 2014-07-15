@@ -171,6 +171,7 @@ class Course
       section.enr_act = row["enr_act"]
       section.wait_cap = row["wait_cap"]
       section.wait_act = row["wait_act"]
+      section.passed = row["passed"]
 
       # update the course details
       course.title = row["title"]
