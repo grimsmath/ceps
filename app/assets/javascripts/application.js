@@ -22,4 +22,5 @@
 //= require holder
 //= require acc-wizard.min
 //= require bootstrap-wizard
+//= require courses
 

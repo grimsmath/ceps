@@ -29,5 +29,5 @@
           = render 'courses/partials/sectionsTab', f: f
 
       .panel-footer
+        = link_to 'Back to Courses', courses_path, class: 'btn btn-success'
         = f.submit 'Save', class: 'btn btn-primary'
-        = link_to 'Back to Courses', courses_path, class: 'btn btn-default'

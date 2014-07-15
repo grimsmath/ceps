@@ -42,4 +42,5 @@
               %i.fa.fa-trash-o
 
 .pull-right
-  = paginate @courses
+  - if params[:show_all].nil?
+    = paginate @courses

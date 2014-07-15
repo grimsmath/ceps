@@ -50,24 +50,25 @@
                     %p= @course.description
 
             #requirements-tab.tab-pane
-              %h4 Requirements
-              %table.table.table-striped
-                %thead
-                  %tr(style="border-top: solid 2px #888")
-                    %th Course Number
-                    %th Course Title
-                    %th Weighting
-                    %th Constraint
-                    %th Is Corequirement
-                %tbody
-                  - @course.requirements.each do |req|
-                    - course = Course.where(number: req.course_id).first
-                    %tr
-                      %td= link_to req.course_id, course
-                      %td= link_to course.title, course
-                      %td= req.weight
-                      %td= req.constraint.to_b?
-                      %td= req.corequirement
+              .bs-callout.bs-callout-warning
+                %h4 Requirements
+                %table.table.table-striped
+                  %thead
+                    %tr(style="border-top: solid 2px #888")
+                      %th Course Number
+                      %th Course Title
+                      %th Weighting
+                      %th Constraint
+                      %th Is Corequirement
+                  %tbody
+                    - @course.requirements.each do |req|
+                      - course = Course.where(id: req.course_id).first
+                      %tr
+                        %td= link_to req.number, course
+                        %td= link_to course.title, course
+                        %td= req.weight
+                        %td= req.constraint.to_constraint
+                        %td= req.corequirement
 
             #sections-tab.tab-pane
               .bs-callout.bs-callout-warning

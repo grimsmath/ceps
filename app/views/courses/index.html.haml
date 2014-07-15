@@ -9,6 +9,10 @@
           New Course
 
     .panel-body
+      .row
+        .col-md-12
+          %input.form-control#q{autocomplete: 'off', placeholder: 'Filter by...'}
+
       #courses
         = render 'courses/partials/table'
 
