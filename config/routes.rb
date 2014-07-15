@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   resources :semesters
 
   resources :courses do
-    collection { post :import }
+    collection { post :do_import }
+  end
+
+  resources :requirements, only: [:do_import] do
+    collection { post :do_import }
   end
 
   get '/predict' => 'predict#index'
@@ -18,7 +22,10 @@ Rails.application.routes.draw do
   get 'manage' => 'home#manage'
   get 'help' => 'home#help'
 
-  get 'importer' => 'importer#index'
+  get 'import',               to: "importer#index"
+  get 'import/courses',       to: 'importer#courses'
+  get 'import/requirements',  to: 'importer#reqs'
+
   get 'courses_by_semester/:id' => 'courses#by_semester'
   get 'all_courses' => 'courses#all_courses'
 

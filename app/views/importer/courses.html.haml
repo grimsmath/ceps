@@ -1,0 +1,81 @@
+= form_tag(do_import_courses_path, html: { role: "form" }, multipart: true) do
+  .col-md-12
+    .panel.panel-info
+      .panel-heading
+        %h4.panel-title Import Course Data
+
+      .panel-body
+        .row
+          .col-md-6
+            .bs-example
+              %p(style="overflow: none")
+                = image_tag('spreadsheet1.png', class: "img-responsive center-block")
+              %p
+                The above image depicts an example data import file.  Be sure to setup your import spreadsheet in a
+                similar fashion using the first row of the spreadsheet as a header and then having the following
+                columns (in order):
+
+              .bs-callout.bs-callout-warning
+                %h4 Column Headings
+                %table.table.table-condensed
+                  %tr
+                    %td.strong crn
+                    %td Course registration number
+                  %tr
+                    %td.strong number
+                    %td Course catalog number
+                  %tr
+                    %td.strong credits
+                    %td Number of credits
+                  %tr
+                    %td.strong title
+                    %td Course catalog title
+                  %tr
+                    %td.strong enr_cap
+                    %td Enrollment capacity
+                  %tr
+                    %td.strong enr_act
+                    %td Actual enrollment
+                  %tr
+                    %td.strong wait_cap
+                    %td Waitlist capacity
+                  %tr
+                    %td.strong wait_act
+                    %td Actual enrollment
+                  %tr
+                    %td.strong passed
+                    %td # of students passing
+
+          .col-md-6
+            %h4(style="border-bottom: solid 1px #dcdcdc")
+              Browse for Import File
+
+            .bs-callout.bs-callout-info
+              %h4 Regarding Importing Course Data
+              Import file must be a Microsoft Excel '97 (.xls) or Microsoft Excel '07 (.xlsx) format.  Click the
+              <strong><em>Browse</em></strong> button to select your import file.  When you have selected your import file,
+              click the <strong><em>Import Data</em></strong> button below.
+
+            .row
+              .col-md-6
+                .form-group
+                  %label.form-label Semester
+                  = collection_select :course, :semester_id, Semester.all, :id, :full_title, { include_blank: '' }, class: "form-control"
+
+              .col-md-6
+                .form-group
+                  %label.form-label Worksheet #
+
+                  = text_field :worksheet, :worksheet_id, class: 'form-control', value: '0'
+
+              .col-md-12
+                = file_field_tag :file, class: 'file'
+
+              .col-md-12(style="margin-top: 20px")
+                = submit_tag 'Import Data', class: 'btn btn-info btn-lg center-block'
+
+      .panel-footer
+        = link_to 'Import Data Home', import_path, class: 'btn btn-success'
+
+:coffee
+  $(".file").fileinput({'showUpload':false, 'previewFileType':'any'});

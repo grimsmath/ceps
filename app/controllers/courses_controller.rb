@@ -73,7 +73,7 @@ class CoursesController < ApplicationController
     end
   end
 
-  def import
+  def do_import
     Course.import(params[:file], params[:course][:semester_id], params[:worksheet][:worksheet_id].to_i)
     redirect_to courses_path, notice: "Data imported."
   end

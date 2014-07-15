@@ -1,0 +1,83 @@
+= form_tag(do_import_requirements_path, html: { role: "form" }, multipart: true) do
+  .col-md-12
+    .panel.panel-warning
+      .panel-heading
+        %h4.panel-title Import Course Requirements
+
+      .panel-body
+        .row
+          .col-md-6
+            .bs-example
+              %p(style="overflow: none")
+                = image_tag('spreadsheet2.png', class: "img-responsive center-block")
+              %p
+                The above image depicts an example data import file.  Be sure to setup your import spreadsheet in a
+                similar fashion using the first row of the spreadsheet as a header and then having the following
+                columns (in order):
+
+              .bs-callout.bs-callout-warning
+                %h4 Column Headings
+                %table.table.table-condensed
+                  %tr
+                    %td.strong course
+                    %td Course registration number
+                  %tr
+                    %td.strong coreq1
+                    %td 1st Co-req Course Number
+                  %tr
+                    %td.strong condition1
+                    %td AND/OR condition
+                  %tr
+                    %td.strong coreq2
+                    %td 2nd Co-req Course Number
+                  %tr
+                    %td.strong prereq1
+                    %td 1st Pre-requisite Course Number
+                  %tr
+                    %td.strong condition2
+                    %td AND/OR condition
+                  %tr
+                    %td.strong prereq2
+                    %td 2nd Pre-requisite Course Number
+                  %tr
+                    %td.strong prereq3
+                    %td 3rd Pre-requisite Course Number
+                  %tr
+                    %td.strong condition3
+                    %td AND/OR condition
+                  %tr
+                    %td.strong prereq4
+                    %td 4th Pre-requisite Course Number
+
+          .col-md-6
+            %h4(style="border-bottom: solid 1px #dcdcdc")
+              Browse for Import File
+
+            .bs-callout.bs-callout-info
+              %h4 Regarding Importing Requirements
+              Import file must be a Microsoft Excel '97 (.xls) or Microsoft Excel '07 (.xlsx) format.  Click the
+              <strong><em>Browse</em></strong> button to select your import file.  When you have selected your import file,
+              click the <strong><em>Import Data</em></strong> button below.
+
+            .row
+              .col-md-6
+                .form-group
+                  %label.form-label Semester
+                  = collection_select :course, :semester_id, Semester.all, :id, :full_title, { include_blank: '' }, class: "form-control"
+
+              .col-md-6
+                .form-group
+                  %label.form-label Worksheet #
+                  = text_field :worksheet, :worksheet_id, class: 'form-control', value: '0'
+
+              .col-md-12
+                = file_field_tag :file, class: 'file'
+
+              .col-md-12(style="margin-top: 20px")
+                = submit_tag 'Import Data', class: 'btn btn-info btn-lg center-block'
+
+      .panel-footer
+        = link_to 'Import Data Home', import_path, class: 'btn btn-success'
+
+:coffee
+  $(".file").fileinput({'showUpload':false, 'previewFileType':'any'});
