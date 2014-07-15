@@ -17,16 +17,16 @@
             %a{href: '#general-tab', data: {toggle: 'tab'}}
               General Details
           %li
-            %a{href: '#sections-tab', data: {toggle: 'tab'}}
-              Sections
-          %li
             %a{href: '#requirements-tab', data: {toggle: 'tab'}}
               Requirements
+          %li
+            %a{href: '#sections-tab', data: {toggle: 'tab'}}
+              Sections
 
         .tab-content
           = render 'courses/partials/generalTab', f: f
-          = render 'courses/partials/sectionsTab', f: f
           = render 'courses/partials/requirementsTab', f: f
+          = render 'courses/partials/sectionsTab', f: f
 
       .panel-footer
         = f.submit 'Save', class: 'btn btn-primary'

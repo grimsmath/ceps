@@ -8,7 +8,8 @@
             %tr(style="border-bottom: solid 2px #999")
               %th Requirement Course Title
               %th.text-center(style="width: 150px") Weight (% fraction)
-              %th.text-center(style="width: 150px") Is Co-requirement
+              %th.text-center(style="width: 100px") Constraint
+              %th.text-center(style="width: 100px") Co-Req?
               %th.action-column Actions
           %tbody
             = f.fields_for :requirements, :wrapper => false do |req_form|
@@ -16,9 +17,11 @@
                 %td
                   = req_form.collection_select :course_id, Course.by_semester(@course.semester_id), :number, :name_with_number, { include_blank: '' }, class: "form-control input-sm"
                 %td.text-center(style="width: 150px")
-                  = req_form.text_field :weight, class: 'box-weight', style: 'text-align: center'
-                %td.text-center(style="width: 150px")
-                  = req_form.check_box :corequirement
+                  = req_form.text_field :weight, class: 'box-weight form-control input-sm', style: 'text-align: center'
+                %td.text-center(style="width: 100px")
+                  = req_form.select :constraint, options_for_select(and_or_select, :selected => req_form.object.constraint), {}, { class: 'form-control input-sm text-center' }
+                %td.text-center(style="width: 100px")
+                  = req_form.select :corequirement, options_for_select(no_yes_select, :selected => req_form.object.corequirement), {}, { class: 'form-control input-sm' }
                 %td.text-center
                   = req_form.link_to_remove class: 'btn btn-default btn-xs' do
                     %i.fa.fa-trash-o

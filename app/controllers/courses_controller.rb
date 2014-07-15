@@ -88,6 +88,6 @@ class CoursesController < ApplicationController
     def course_params
       params.require(:course).permit(:title, :crn, :number, :credits, :is_locked, :semester_id, :description, :url,
                                      sections_attributes: [:id, :crn, :enr_act, :enr_cap, :wait_cap, :wait_act, :passed, :_destroy],
-                                     requirements_attributes: [:id, :course_id, :corequirement, :_destroy])
+                                     requirements_attributes: [:id, :course_id, :corequirement, :constraint, :weight, :_destroy])
     end
 end

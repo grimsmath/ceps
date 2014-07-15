@@ -9,4 +9,20 @@ module ApplicationHelper
       nil
     end
   end
+
+  def yes_no_select
+    return [[ 'YES', true ], [ 'NO', false ]]
+  end
+
+  def no_yes_select
+    return yes_no_select.reverse!
+  end
+
+  def and_or_select
+    return [[ 'AND', '0' ], [ 'OR', '1' ]]
+  end
+
+  def or_and_select
+    return and_or_select.reverse!
+  end
 end

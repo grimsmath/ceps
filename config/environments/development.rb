@@ -31,6 +31,8 @@ Rails.application.configure do
 
   config.middleware.use(Mongoid::QueryCache::Middleware)
 
+  config.autoload_paths += Dir[File.join(Rails.root, "lib", "core_ext", "*.rb")].each {|l| require l }
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
