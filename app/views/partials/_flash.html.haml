@@ -1,7 +1,6 @@
 .flash-div.col-md-12
-  - if flash.count > 0
-    = flash.each do |key, value|
-      .alert{ class: flash_class(key) }
-        %button.close{ :data => { :dismiss => "alert" } } x
-        %strong
-          = value
+  - flash.each do |key, value|
+    .alert{ class: flash_class(key) }
+      %button.close{ :data => { :dismiss => "alert" } } x
+      %strong
+        = value
