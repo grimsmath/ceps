@@ -12,6 +12,8 @@
               %a{href: '#general-tab', data: {toggle: 'tab'}} General Details
             %li
               %a{href: '#semesters-tab', data: {toggle: 'tab'}} Semesters
+            %li
+              %a{href: '#templates-tab', data: {toggle: 'tab'}} Course Templates
 
           .tab-content
             #general-tab.tab-pane.active
@@ -49,7 +51,8 @@
                         %td= semester.updated_at.to_formatted_s(:short)
 
             #templates-tab.tab-pane
-              .bs-callout.bs-callout-success
+              .bs-callout.bs-callout-warning
+                %h4 Course Templates
                 %table.table.table-striped
                   %thead
                     %tr(style="border-top: solid 2px #888")
@@ -66,5 +69,5 @@
                         %td= template.updated_at.to_formatted_s(:short)
 
     .panel-footer
-      = link_to 'Edit', edit_catalog_path(@catalog), class: "btn btn-primary"
       = link_to 'Back to Catalogs', catalogs_path, class: "btn btn-success"
+      = link_to 'Edit', edit_catalog_path(@catalog), class: "btn btn-primary"

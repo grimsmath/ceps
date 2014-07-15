@@ -4,7 +4,5 @@ class Template < Content
 
   field :course_title,  type: String, default: ""
   field :course_number, type: String, default: ""
-
-  embeds_many :requirements, cascade_callbacks: true
-  accepts_nested_attributes_for :requirements, :allow_destroy => true
+  field :weight,        type: Float,  default: .50
 end
