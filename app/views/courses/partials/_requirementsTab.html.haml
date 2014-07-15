@@ -7,6 +7,7 @@
           %thead
             %tr(style="border-bottom: solid 2px #999")
               %th Requirement Course Title
+              %th.text-center(style="width: 150px") Weight (% fraction)
               %th.text-center(style="width: 150px") Is Co-requirement
               %th.action-column Actions
           %tbody
@@ -14,6 +15,8 @@
               %tr.fields
                 %td
                   = req_form.collection_select :course_id, Course.by_semester(@course.semester_id), :number, :name_with_number, { include_blank: '' }, class: "form-control input-sm"
+                %td.text-center(style="width: 150px")
+                  = req_form.text_field :weight, class: 'box-weight', style: 'text-align: center'
                 %td.text-center(style="width: 150px")
                   = req_form.check_box :corequirement
                 %td.text-center
@@ -27,3 +30,11 @@
     .bs-callout.bs-callout-warning
       %h4 Course Requirements
       Please complete the course details and save the course before adding any requirements
+
+:coffee
+  $(".box-weight").change ->
+    val = $(this).val()
+    if val > 1
+      alert "Weight value must not be greater than 1"
+    else if val < 0
+      alert "Weight value must not be less than 0"
