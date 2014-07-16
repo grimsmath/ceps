@@ -5,7 +5,7 @@
 $().ready ->
   $("#q").keyup ->
     re = new RegExp($("#q").val(), "i")
-    $('tr').each ->
+    $('tr#course').each ->
       if $(this).children().text().match(re)
         $(this).show()
       else
