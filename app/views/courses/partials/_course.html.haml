@@ -1,0 +1,30 @@
+- @courses.each do |course|
+  %tr
+    %td(style="width: 100px")
+      = link_to course.number, course
+    %td
+      = link_to course.title, course
+    %td
+      = course.sections.count.to_s
+    %td(style="width: 150px")
+      - semester = Semester.where(id: course.semester_id).first
+      - unless semester.nil?
+        = link_to semester.title + ' ' + semester.year.to_s, semester
+      - else
+        Semester not defined
+    %td.date-column
+      = course.created_at.to_formatted_s(:short)
+    %td.date-column
+      = course.updated_at.to_formatted_s(:short)
+    %td.action-column
+      - if course.is_locked?
+        .i.fa.fa-lock.btn.btn-default.btn-xs(title="Locked")
+      - else
+        .i.fa.fa-unlock.btn.btn-default.btn-xs(title="Unlocked")
+
+      = link_to edit_course_path(course), class: 'btn btn-default btn-xs' do
+        %i.fa.fa-edit
+
+      .btn.btn-default.btn-xs
+        = link_to course, method: :delete, data: { :confirm => 'Are you sure you want to delete the course?' } do
+          %i.fa.fa-trash-o

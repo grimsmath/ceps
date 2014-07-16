@@ -5,11 +5,11 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = unless params[:show_all]
-      Course.page(params[:page])
-    else
-      @courses = Course.all
-    end
+    @courses = Course.page(params[:page])
+    # respond_to do |format|
+    #   format.html #responds with default html file
+    #   format.js #this will be the javascript file we respond with
+    # end
   end
 
   def by_semester

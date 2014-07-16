@@ -68,7 +68,7 @@
                         %td= link_to course.title, course
                         %td= req.weight
                         %td= req.constraint.to_constraint
-                        %td= req.corequirement
+                        %td= req.corequirement.to_y_n
 
             #sections-tab.tab-pane
               .bs-callout.bs-callout-warning
