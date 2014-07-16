@@ -1,2 +1,3 @@
-$('tbody#courses').html('<%= escape_javascript(render("courses")) %>');
-$('#paginator').html('<%= paginate(@courses, :remote => true).to_s %>');
+:plain
+  $('tbody#courses').html('#{j render("courses/partials/course")}');
+  $('#paginator').html('#{j paginate(@courses, :remote => true).to_s }');
