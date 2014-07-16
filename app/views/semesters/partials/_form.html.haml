@@ -19,15 +19,20 @@
 
         .badger-left{data: {badger: "General Details"}}
           .row
-            .col-md-6
+            .col-md-4
               .form-group
                 = f.label :title, class: 'form-label'
                 = f.text_field :title, class: 'form-control'
 
-            .col-md-6
+            .col-md-4
               .form-group
                 = f.label 'Calendar Year', class: 'form-label'
                 = f.text_field :year, class: 'form-control'
+
+            .col-md-4
+              .form-group
+                = f.label 'Sort', class: 'form-label'
+                = f.text_field :sort, class: 'form-control'
 
           .form-group
             = f.label 'Catalog/Schedule', class: 'form-label'

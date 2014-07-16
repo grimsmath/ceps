@@ -96,3 +96,5 @@ gem 'kaminari'
 # image placeholder
 # https://github.com/narkoz/holder_rails
 gem 'holder_rails'
+
+gem "js-routes"

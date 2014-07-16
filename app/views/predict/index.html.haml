@@ -154,15 +154,19 @@
     wizard.close()
     return false
 
+
   $('#current_semester_id').change ->
-    $.get '/courses_by_semester/' + $('#current_semester_id').val(), (data) ->
+    id = $('#current_semester_id').val()
+    $.ajax
+      url: Routes.courses_by_semester_path(id)
+      type: 'get'
 
-      $('#review-current-semester').text($('#current_semester_id option:selected').text())
-
-      $('#course_select').empty()
-      for e in data
-        option = $('<option></option>').attr('value', e.number).text(e.number + ' - ' + e.title);
-        $("#course_select").append(option);
+      success: (data, textStatus, jqXHR) ->
+        $('#review-current-semester').text($('#current_semester_id option:selected').text())
+        $('#course_select').empty()
+        for e in data
+          option = $('<option></option>').attr('value', e.number).text(e.number + ' - ' + e.title);
+          $("#course_select").append(option);
 
   $('#course_select').change ->
     $('#review-selected-courses').text($("#course_select option:selected").size() + ' course(s) selected')

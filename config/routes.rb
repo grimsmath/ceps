@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get 'import/courses',       to: 'importer#courses'
   get 'import/requirements',  to: 'importer#reqs'
 
-  get 'courses_by_semester/:id' => 'courses#by_semester'
+  get 'courses_by_semester/:id' => 'courses#by_semester', as: 'courses_by_semester'
   get 'all_courses' => 'courses#all_courses'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,27 +1,32 @@
 class Predict
 
-  def self.enrollment(course, current_semester_id, start_semester_id, end_semester_id)
-    return_hash = {}
-    req_enrolled = []
+
+  def self.enrollment(course_number, current_semester_id, start_semester_id, end_semester_id)
+    return_hash   = {}
+    req_enrolled  = []
 
     # This array will hold all of enrollment for the course spanning the semesters, this
     # will be one of the arrays used in the prediction model
-    course_enrolled = Course.all_enrolled_between(course, start_semester_id, end_semester_id)
+    course_enrolled = Course.all_enrolled_between(course_number, start_semester_id, end_semester_id)
 
-    my_course = Course.where(number: course).and(semester_id: current_semester_id).first
+    #
+    # This is the main course object we are concerned about
+    #
+    my_course = Course.where(number: course_number).and(semester_id: current_semester_id).first
 
     #
     # Next we need to get all of the pre-requisite enrollment data elements
     #
     if my_course.requirements.exists?
       #
-      # Course has pre-reqs
+      # Course has requirements, co-req or pre-req or both
       #
       requirements = my_course[:requirements]
 
+      # for each of the requirements, we need to get their respective enrollments for the same timespan
       requirements.each do |req|
-        tmp_course = Course.where(number: req[:course_id]).first
-        req_enrolled << Course.all_enrolled_between(tmp_course.number, start_semester_id, end_semester_id)
+        req_course = Course.where(id: req[:course_id]).first
+        req_enrolled << Course.all_enrolled_between(req_course.number, start_semester_id, end_semester_id)
       end
 
       #
@@ -36,6 +41,7 @@ class Predict
           end
         end
 
+        # remove the unwanted semesters of data from the array
         items_to_remove.each do |item|
           req.delete(item)
         end
@@ -46,8 +52,8 @@ class Predict
       #
       prediction = {}
       req_enrolled.each do |req|
-        my_array = req.values
-        prediction[req] = calculate_enrollment_with_requirements(course_enrolled.values.to_a, my_array)
+        req_values = req.values
+        prediction[req] = enrollment_with_requirements(course_enrolled.values.to_a, req_values)
       end
 
       #
@@ -82,59 +88,55 @@ class Predict
   end
 
   protected
-  def self.predict_course_enrollment(dataset)
-    return calculate_enrollment(dataset.values.to_a)
-  end
-
-  protected
-  def self.predict_requirement_enrollment(requirements)
-    # we may have multiple pre-requisite course data, so iterate each pre-req course
-    results = {}
-    requirements.each do |req|
-      my_array = req.values
-      results[req] = calculate_enrollment(my_array)
+    def self.course_enrollment(dataset)
+      return calculate_enrollment(dataset.values.to_a)
     end
 
-    return results
-  end
-
-  protected
-  def self.calculate_enrollment_without_requirements(dataset)
-    growth_factors = []
-
-    for i in 0..dataset.length
-      if dataset[i + 1].nil? == false
-        growth_factors << (dataset[i].to_f / dataset[i + 1].to_f).round(2)
+    def self.requirement_enrollment(requirements)
+      # we may have multiple pre-requisite course data, so iterate each pre-req course
+      results = {}
+      requirements.each do |req|
+        my_array = req.values
+        results[req] = calculate_enrollment(my_array)
       end
+
+      return results
     end
 
-    growth_factor_average = (growth_factors.sum.to_f / growth_factors.size).round(2)
+    def self.enrollment_without_requirements(dataset)
+      growth_factors = []
 
-    p dataset
-
-    predicted_enr = (dataset.last * growth_factor_average).round(2)
-
-    return predicted_enr
-  end
-
-
-  protected
-  def self.calculate_enrollment_with_requirements(course_data, requirement_data)
-    growth_factors = []
-
-    course_data.each_with_index do |item, index|
-      if index != 0
-        growth_factors << item.to_f / requirement_data.fetch(index - 1)
+      for i in 0..dataset.length
+        if dataset[i + 1].nil? == false
+          growth_factors << (dataset[i].to_f / dataset[i + 1].to_f).round(2)
+        end
       end
+
+      growth_factor_average = (growth_factors.sum.to_f / growth_factors.size).round(2)
+
+      p dataset
+
+      predicted_enr = (dataset.last * growth_factor_average).round(2)
+
+      return predicted_enr
     end
 
-    growth_factor_average = (growth_factors.sum.to_f / growth_factors.size).round(2)
+    def self.enrollment_with_requirements(course_data, requirement_data)
+      growth_factors = []
 
-    predicted_enr = (course_data[course_data.count -1].to_f * growth_factor_average).round(2)
+      course_data.each_with_index do |item, index|
+        if index != 0
+          growth_factors << item.to_f / requirement_data.fetch(index - 1)
+        end
+      end
 
-    return {
-      growth_factor_avg: growth_factor_average,
-      predicted_enrollment: predicted_enr
-    }
-  end
+      growth_factor_average = (growth_factors.sum.to_f / growth_factors.size).round(2)
+
+      predicted_enr = (course_data[course_data.count -1].to_f * growth_factor_average).round(2)
+
+      return {
+        growth_factor_avg: growth_factor_average,
+        predicted_enrollment: predicted_enr
+      }
+    end
 end

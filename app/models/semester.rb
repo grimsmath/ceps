@@ -10,6 +10,7 @@ class Semester
   field :title,       type: String,   default: ""
   field :is_locked,   type: Boolean,  default: false
   field :year,        type: Integer,  default: ""
+  field :sort,        type: Integer
 
   def full_title
     "#{title} " + "#{year}"

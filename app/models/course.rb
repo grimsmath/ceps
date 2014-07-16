@@ -55,11 +55,10 @@ class Course
   end
 
   def self.all_enrolled_between(course_number, begin_semester_id, end_semester_id)
-    begin_semester = Semester.where(id: begin_semester_id).first
-    end_semester = Semester.where(id: end_semester_id).first
-
-    begin_year = begin_semester[:year]
-    end_year = end_semester[:year]
+    begin_semester  = Semester.where(id: begin_semester_id).first
+    end_semester    = Semester.where(id: end_semester_id).first
+    begin_year      = begin_semester[:year]
+    end_year        = end_semester[:year]
 
     semesters = []
     Semester.where(:year.gte => begin_year).where(:year.lte => end_year).each do |sem|
@@ -68,8 +67,14 @@ class Course
 
     enrolled = Hash.new
     where(number: course_number).any_in(semester_id: semesters).each do |course|
-      enrolled[course.semester_id.to_s] = course.enrolled
+      semester = Semester.where(id: course.semester_id).first
+      catalog = Catalog.where(id: semester.catalog_id).first
+      enrolled[catalog: catalog.title, semester_id: semester.id, semester_year: semester.year, semester_title: semester.title] = course.enrolled
     end
+
+    enrolled.sort_by { |a| a[:catalog] }
+
+    p enrolled
 
     return enrolled
   end

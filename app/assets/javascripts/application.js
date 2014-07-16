@@ -23,4 +23,6 @@
 //= require acc-wizard.min
 //= require bootstrap-wizard
 //= require courses
+//= require js-routes
+//= require routes
 
