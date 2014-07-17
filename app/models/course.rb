@@ -69,12 +69,11 @@ class Course
     where(number: course_number).any_in(semester_id: semesters).each do |course|
       semester = Semester.where(id: course.semester_id).first
       catalog = Catalog.where(id: semester.catalog_id).first
-      enrolled[catalog: catalog.title, semester_id: semester.id, semester_year: semester.year, semester_title: semester.title] = course.enrolled
+
+      enrolled[catalog: catalog.title,
+               semester_year: semester.year,
+               semester_title: semester.title] = course.enrolled
     end
-
-    enrolled.sort_by { |a| a[:catalog] }
-
-    p enrolled
 
     return enrolled
   end
