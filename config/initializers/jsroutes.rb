@@ -1,5 +1,5 @@
 JsRoutes.setup do |config|
   if Rails.env.development?
-    config.option.prefix = 'ceps'
+    config.prefix = 'ceps'
   end
 end
