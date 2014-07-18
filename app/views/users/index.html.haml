@@ -1,17 +1,30 @@
-%h1 Listing users
+.col-md-12
+  .panel.panel-info
+    .panel-heading.clearfix
+      %h4.panel-title.pull-left
+        Users
 
-%table
-  %tr
-    %th
-    %th
-    %th
+    .panel-body
+      %table.table.table-striped
+        %tr
+          %th Email
+          %th Last Name
+          %th First Name
+          %th.action-column
+            Actions
 
-  - @users.each do |user|
-    %tr
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        - @users.each do |user|
+          %tr
+            %td
+              = link_to user.email, user
+            %td= user.last_name
+            %td= user.first_name
+            %td.action-column
+              = link_to edit_user_path(user), class: 'btn btn-default btn-xs' do
+                %i.fa.fa-edit
+              .btn.btn-default.btn-xs
+                = link_to user, method: :delete, data: { :confirm => 'Are you sure you want to delete the user?' } do
+                  %i.fa.fa-trash-o
 
-%br
-
-= link_to 'New User', new_user_path
+    .panel-footer
+      = link_to 'New User', new_user_path, class: 'btn btn-primary'
