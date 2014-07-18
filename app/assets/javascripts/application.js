@@ -20,7 +20,6 @@
 //= require jquery.bootstrap-touchspin
 //= require bootstrap-switch
 //= require holder
-//= require acc-wizard.min
 //= require bootstrap-wizard
 //= require courses
 //= require js-routes

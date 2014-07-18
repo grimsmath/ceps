@@ -7,12 +7,14 @@ class PredictController < ApplicationController
     start_semester    = params[:start][:semester_id]
     end_semester      = params[:end][:semester_id]
 
-    @predict = {}
+    predict = []
 
     course_numbers.each do |number|
-      @predict[number] = Predict.enrollment(number, current_semester, start_semester, end_semester)
+      predict << Predict.enrollment(number, current_semester, start_semester, end_semester)
     end
 
-    render :json => { courses: @predict }.to_json
+    p predict
+
+    render :json => { courses: predict }.to_json
   end
 end

@@ -60,12 +60,6 @@
             %label.form-label Ending Semester
             = select("end", "semester_id", Semester.desc(:year).collect {|p| [ p.full_title, p.id ] }, {include_blank: 'Please select...'}, class: "form-control")
 
-    .wizard-card{data: {cardname: 'card-course-weight'}}
-      %h3 Weight Course Requirements
-      .wizard-input-section
-        .col-md-12
-          %p Something should go here
-
     .wizard-card{data: {cardname: 'card-review'}}
       %h3 Review Selection
       .wizard-input-section
@@ -108,6 +102,7 @@
       %h3 Prediction Failed
       #failures
 
+
 :coffee
   wizard = $('#wizard-predict').wizard
     contentHeight: 500
@@ -128,18 +123,24 @@
       dataType: 'json'
 
       success: (data, textStatus, jqXHR) ->
-        console.log data
         $('#data-results').text(JSON.stringify(data))
 
         text = ''
-
         for key, value of data.courses
+          data_container = '<div class="hidden" id="' + value.course_number + '">' + value + '</div>'
+
           text += '<tr>'
           text += ' <td>' + value.course_number  + '</td>'
           text += ' <td>' + value.course_title + '</td>'
-          text += ' <td>' + value.predicted_enrollment + '</td>'
+          text += ' <td>'
+          text += '   <a href="#" id="data-' + value.course_number + '">'
+          text +=       value.predicted_enrollment
+          text += '   </a>'
+          text += data_container
+          text += ' </td>'
           text += '</tr>'
 
+        $('#results-table tbody').html('')
         $('#results-table tbody').append(text)
 
         wizard.submitSuccess()

@@ -91,6 +91,24 @@ class Predict
       #
       # Course does not have pre-reqs
       #
+      prediction = Course.all_enrolled_between(my_course[:number], start_semester_id, end_semester_id)
+
+      enrolled = []
+      prediction.each do |pre|
+        enrolled << pre[1]
+      end
+
+      predicted_enr = enrolled.mean
+
+      return_hash = {
+        course_id: my_course.id.to_s,
+        course_title: my_course.title,
+        course_number: my_course.number,
+        course_enrollment: course_enrolled,
+        course_requirements: nil,
+        prediction_dataset: prediction.to_a,
+        predicted_enrollment: predicted_enr.round(2)
+      }
     end
 
     return return_hash
@@ -224,21 +242,21 @@ class Predict
     # -----------------------------------------------------------------------------
     # This method calculates the enrollment of a course that has a pre-req
     # -----------------------------------------------------------------------------
-    def self.course_enrollment(dataset)
-      return calculate_enrollment(dataset.values.to_a)
-    end
+    # def self.course_enrollment(course, begin_semester_id, end_semester_id)
+    #   p Course.all_enrolled_between(course[:number], begin_semester_id, end_semester_id)
+    # end
 
     # -----------------------------------------------------------------------------
     # This method calculates the enrollment of a course that has a pre-req
     # -----------------------------------------------------------------------------
-    def self.requirement_enrollment(requirements)
-      # we may have multiple pre-requisite course data, so iterate each pre-req course
-      results = {}
-      requirements.each do |req|
-        my_array = req.values
-        results[req] = calculate_enrollment(my_array)
-      end
-
-      return results
-    end
+    # def self.requirement_enrollment(requirements)
+    #   # we may have multiple pre-requisite course data, so iterate each pre-req course
+    #   results = {}
+    #   requirements.each do |req|
+    #     my_array = req.values
+    #     results[req] = calculate_enrollment(my_array)
+    #   end
+    #
+    #   return results
+    # end
 end
