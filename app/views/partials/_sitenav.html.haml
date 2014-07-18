@@ -12,22 +12,25 @@
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li
-          = link_to 'Home', root_path
+          = link_to root_path do
+            %i.fa.fa-home
+              Home
         %li
-          = link_to 'Predict', predict_path
+          = link_to predict_path do
+            %i.fa.fa-bullseye
+              Predict
+
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-            Manage
-            %b.caret
+            %i.fa.fa-database
+              Manage
+              %b.caret
           %ul.dropdown-menu
             %li
               = link_to courses_path do
                 %i.fa.fa-book
                 %nbsp Courses
-            %li
-              = link_to templates_path do
-                %i.fa.fa-th-list
-                  Templates
+
             %li
               = link_to semesters_path do
                 %i.fa.fa-calendar-o
@@ -36,6 +39,12 @@
               = link_to catalogs_path do
                 %i.fa.fa-calendar
                 Catalogs
+
+            %li.divider
+            %li
+              = link_to users_path do
+                %i.fa.fa-user
+                Users
 
             %li.divider
             %li
