@@ -66,8 +66,12 @@ class Predict
 
       predicted_enr = 0
       unless creqs.nil?
-        if creqs.max[1] > p_result
-          predicted_enr = creqs.max[1]
+        unless creqs.empty?
+          if creqs.max[1] > p_result
+            predicted_enr = creqs.max[1]
+          else
+            predicted_enr = p_result
+          end
         else
           predicted_enr = p_result
         end
@@ -207,9 +211,13 @@ class Predict
       values          = []
 
       course_array.each do |c|
+        p c
         req = req_array.find { |r| [r[0][:catalog], r[0][:semester_year], r[0][:semester_title]] ==
                                    [c[0][:catalog], c[0][:semester_year], c[0][:semester_title]] }
-        values << [course: c[0][:enrollment], req: req[0][:enrollment]]
+
+        unless req.nil?
+          values << [course: c[0][:enrollment], req: req[0][:enrollment]]
+        end
       end
 
       courses = []
