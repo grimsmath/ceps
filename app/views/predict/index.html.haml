@@ -115,7 +115,10 @@
     backdrop: 'static'
 
   $('#new-prediction').click ->
+    wizard.reset()
     wizard.show()
+
+  wizard.on "reset", ->
 
   wizard.on "submit", ->
     $.ajax

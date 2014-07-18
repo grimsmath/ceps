@@ -65,8 +65,12 @@ class Predict
       end
 
       predicted_enr = 0
-      if creqs.max[1] > p_result
-        predicted_enr = creqs.max[1]
+      unless creqs.nil?
+        if creqs.max[1] > p_result
+          predicted_enr = creqs.max[1]
+        else
+          predicted_enr = p_result
+        end
       else
         predicted_enr = p_result
       end
