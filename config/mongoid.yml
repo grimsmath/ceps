@@ -75,8 +75,8 @@ production:
   sessions:
     default:
       database: ceps
-      username: ceps
-      password: password
+      #username: ceps
+      #password: password
 
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
