@@ -81,7 +81,8 @@ production:
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-        - dbh63.mongolab.com:27637
+        - localhost:27017
+        # - dbh63.mongolab.com:27637
   options:
     # Includes the root model name in json serialization. (default: false)
     # include_root_in_json: false
