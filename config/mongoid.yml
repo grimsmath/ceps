@@ -29,6 +29,6 @@ production:
       password: password
 
       hosts:
-        - localhost:27017
+        - ceps.ccec.unf.edu:27017
 
       options:
