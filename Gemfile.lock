@@ -56,6 +56,8 @@ GEM
     execjs (2.2.1)
     font-awesome-sass (4.1.0)
       sass (~> 3.2)
+    google-webfonts (0.2.0)
+      actionpack (>= 3.0.0)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -195,6 +197,7 @@ DEPENDENCIES
   data_table (~> 0.4.13)
   devise
   font-awesome-sass
+  google-webfonts
   haml
   haml-rails
   holder_rails

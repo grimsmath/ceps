@@ -5,9 +5,7 @@
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
     %title Course Enrollment Prediction System
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-
-    %link{href: 'http://fonts.googleapis.com/css?family=Raleway:100', rel: 'stylesheet', type: 'text/css'}
-
+    = google_webfonts_link_tag :raleway => [100]
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
