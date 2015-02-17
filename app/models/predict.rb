@@ -102,7 +102,7 @@ class Predict
         enrolled << pre[1]
       end
 
-      predicted_enr = enrolled.max
+      predicted_enr = enrolled
 
       return_hash = {
         course_id: my_course.id.to_s,
