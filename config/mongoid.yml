@@ -6,6 +6,7 @@ development:
       password: password
       hosts:
         - dbh63.mongolab.com:27637
+
   options:
     raise_not_found_error: false
 
@@ -15,6 +16,7 @@ test:
       database: ceps_test
       hosts:
         - localhost:27017
+
   options:
     read: primary
     max_retries: 1
@@ -28,7 +30,7 @@ production:
       username: ceps
       password: password
       hosts:
-        - dbh63.mongolab.com:27637
-#        - ceps.ccec.unf.edu:27017
+        - localhost:27017
+
   options:
     raise_not_found_error: false
