@@ -128,7 +128,7 @@
 
       success: (data, textStatus, jqXHR) ->
         $('#data-results').text(JSON.stringify(data))
-
+        console.log(data);
         text = ''
         for key, value of data.courses
           data_container = '<div class="hidden" id="' + value.course_number + '">' + value + '</div>'
