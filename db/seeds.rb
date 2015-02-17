@@ -24,7 +24,7 @@ catalog05 = Catalog.create(title: '2013-2014 Academic Catalog')
 catalog06 = Catalog.create(title: '2014-2015 Academic Catalog')
 
 # =============================================
-# Catalogs
+# Semesters
 # =============================================
 Semester.destroy_all()
 sem01 = Semester.create(title: 'Fall 2009',     catalog_id: catalog01.id)

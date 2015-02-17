@@ -115,8 +115,7 @@ class Course
   end
 
   def dec_catalog_course_count
-    semester = Semester.where(id: semester_id).first
-    catalog = Catalog.where(id: semester.catalog_id).first
+    catalog = Catalog.where(id: Semester.where(id: semester_id).first.catalog_id).first
     catalog.inc(course_count: -1)
   end
 
