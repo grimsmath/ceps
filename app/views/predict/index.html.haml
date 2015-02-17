@@ -132,7 +132,7 @@
         text = ''
         for key, value of data.courses
           data_container = '<div class="hidden" id="' + value.course_number + '">' + value + '</div>'
-
+          console.log(data);
           text += '<tr>'
           text += ' <td>' + value.course_number  + '</td>'
           text += ' <td>' + value.course_title + '</td>'
