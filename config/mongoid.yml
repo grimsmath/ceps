@@ -28,6 +28,7 @@ production:
       username: ceps
       password: password
       hosts:
-        - ceps.ccec.unf.edu:27017
+        - dbh63.mongolab.com:27637
+#        - ceps.ccec.unf.edu:27017
   options:
     raise_not_found_error: false
