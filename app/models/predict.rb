@@ -98,11 +98,29 @@ class Predict
       prediction = Course.all_enrolled_between(my_course[:number], start_semester_id, end_semester_id)
 
       enrolled = []
+
+      enr_past = Course.all_enrolled(course_number, start_semester_id)
+      enr_current = Course.all_enrolled(course_number, end_semester_id)
+
       prediction.each do |pre|
         enrolled << pre[1]
       end
 
-      predicted_enr = enrolled
+      p enrolled
+
+      # growth_rate = (enr_current - enr_past).to_f / enr_past.to_f
+      growth_rate = enrolled.growth.wma.round_to(4)
+      growth_rate_percent = enrolled.growth.wma.as_percent(3)
+
+      # Need to calculate a better growth rate and then add it
+      # to the latest enrollment in the set
+      unless growth_rate < 0.25
+        predicted_enr = enr_current * growth_rate
+      else
+        predicted_enr = enrolled.median
+      end
+
+      p predicted_enr
 
       return_hash = {
         course_id: my_course.id.to_s,
@@ -111,7 +129,9 @@ class Predict
         course_enrollment: course_enrolled,
         course_requirements: nil,
         prediction_dataset: prediction.to_a,
-        predicted_enrollment: predicted_enr.round(2)
+        predicted_enrollment: predicted_enr.round(2),
+        growth_rate: growth_rate,
+        growth_rate_percent: growth_rate_percent
       }
     end
 
