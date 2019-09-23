@@ -2,10 +2,9 @@ development:
   clients:
     default:
       database: ceps
-      username: ceps_user
-      password: Fast_100
+      username:
+      password:
       hosts:
-        - ds015770.mlab.com:15770
 
   options:
     raise_not_found_error: false
@@ -13,11 +12,10 @@ development:
 test:
   clients:
     default:
-      database: ceps_test
-      username: ceps_user
-      password: falkirk1
+      database: ceps
+      username:
+      password:
       hosts:
-        - ds015770.mlab.com:15770
 
   options:
     read: primary
@@ -29,10 +27,9 @@ production:
   clients:
     default:
       database: ceps
-      username: ceps_user
-      password: Fast_100
+      username:
+      password:
       hosts:
-        - ds015770.mlab.com:15770
 
   options:
     raise_not_found_error: false

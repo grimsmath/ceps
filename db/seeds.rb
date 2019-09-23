@@ -10,7 +10,7 @@
 # Users
 # =============================================
 User.destroy_all()
-User.create(email: 'david.king@unf.edu', first_name: 'David', last_name: 'King', password: 'password')
+User.create(email: 'grimsmath@gmail.com', first_name: 'David', last_name: 'King', password: 'password')
 
 # =============================================
 # Catalogs
