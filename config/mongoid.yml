@@ -1,10 +1,11 @@
 development:
   clients:
     default:
-      database: ceps
-      username:
-      password:
+      database: "<%= ENV['MONGODB_DATABASE'] %>"
+      username: "<%= ENV['MONGODB_USERNAME'] %>"
+      password: "<%= ENV['MONGODB_PASSWORD'] %>"
       hosts:
+        - "<%= ENV['MONGODB_HOST'] %>:<%= ENV['MONGODB_PORT'] %>"
 
   options:
     raise_not_found_error: false
@@ -12,10 +13,11 @@ development:
 test:
   clients:
     default:
-      database: ceps
-      username:
-      password:
+      database: "<%= ENV['MONGODB_DATABASE'] %>"
+      username: "<%= ENV['MONGODB_USERNAME'] %>"
+      password: "<%= ENV['MONGODB_PASSWORD'] %>"
       hosts:
+        - "<%= ENV['MONGODB_HOST'] %>:<%= ENV['MONGODB_PORT'] %>"
 
   options:
     read: primary
@@ -26,10 +28,11 @@ test:
 production:
   clients:
     default:
-      database: ceps
-      username:
-      password:
+      database: "<%= ENV['MONGODB_DATABASE'] %>"
+      username: "<%= ENV['MONGODB_USERNAME'] %>"
+      password: "<%= ENV['MONGODB_PASSWORD'] %>"
       hosts:
+        - "<%= ENV['MONGODB_HOST'] %>:<%= ENV['MONGODB_PORT'] %>"
 
   options:
     raise_not_found_error: false
