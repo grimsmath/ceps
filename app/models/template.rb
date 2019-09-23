@@ -2,8 +2,6 @@ class Template < Content
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  paginates_per 10
-
   belongs_to :catalog
 
   field :course_title,  type: String, default: ""

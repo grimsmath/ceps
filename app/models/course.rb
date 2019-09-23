@@ -4,8 +4,6 @@ class Course
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  paginates_per 10
-
   belongs_to :semester
 
   embeds_many :sections, cascade_callbacks: true

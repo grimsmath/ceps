@@ -1,17 +1,17 @@
 source 'https://rubygems.org'
-#ruby '2.1.1'
+ruby '2.6.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.0.rc2'
+gem 'rails'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.2'
+gem 'sassc-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer',  platforms: :ruby
@@ -24,18 +24,18 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring', group: :development
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt'
 
-gem 'multi_json', '1.5.1'
+gem 'multi_json'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -62,15 +62,15 @@ gem 'haml'
 gem 'haml-rails' # For generators.
 
 # Bootstrap with SASS support
-gem 'bootstrap-sass', '~> 3.1.1.1'
-gem 'bootstrap-generators', '~> 3.1.1'
+gem 'bootstrap-sass'
+gem 'bootstrap-generators'
 
 # Handle importing spreadsheets
 # https://github.com/Empact/roo
 gem 'roo'
 
 # MongoDB ODM Support
-gem 'mongoid', "~> 4.0.0"#, github: 'mongoid/mongoid'
+gem 'mongoid'
 
 # Use for tree like structure in categories
 # https://github.com/benedikt/mongoid-tree
@@ -78,28 +78,28 @@ gem 'mongoid', "~> 4.0.0"#, github: 'mongoid/mongoid'
 # gem 'mongoid-tree', :require => 'mongoid/tree'
 
 # Font Awesome icons for SASS
-gem 'font-awesome-sass'
-#gem "font-awesome-rails"
+gem 'font-awesome-rails'
+
+# Google Webfonts
+gem 'google-webfonts', require: 'google/webfonts/rails'
 
 # Use R Bates Nested Form to allow for multiple models manipulated in single view
 gem 'nested_form'
 gem 'simple_form'
 
 # https://github.com/jasondew/data_table
-gem 'data_table', '~> 0.4.13'
+gem 'data_table'
 
 # Used for pagination
 # https://github.com/amatsuda/kaminari
-gem 'kaminari'
+gem 'kaminari', github: 'amatsuda/kaminari'
+gem 'kaminari-mongoid'
 
 # image placeholder
 # https://github.com/narkoz/holder_rails
 gem 'holder_rails'
 
 gem "js-routes"
-
-# https://github.com/travishaynes/Google-Webfonts-Helper
-gem 'google-webfonts'
 
 # Statistics
 gem 'simple_statistics'

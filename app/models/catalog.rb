@@ -2,7 +2,7 @@ class Catalog
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  paginates_per 10
+  paginates_per 20
 
   has_many :semesters
   has_many :templates

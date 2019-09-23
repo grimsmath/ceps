@@ -2,8 +2,6 @@ class Semester
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  paginates_per 10
-
   belongs_to :catalog
   has_many :courses, after_add: :inc_course_count, after_remove: :dec_course_count
 
