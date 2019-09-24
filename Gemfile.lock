@@ -147,6 +147,12 @@ GEM
     mongoid (7.0.4)
       activemodel (>= 5.1, < 6.0.0)
       mongo (>= 2.5.1, < 3.0.0)
+    mongoid_rails_migrations (1.2.1)
+      activesupport (>= 4.2.0)
+      bundler (>= 1.0.0)
+      mongoid (>= 4.0.0)
+      rails (>= 4.2.0)
+      railties (>= 4.2.0)
     multi_json (1.13.1)
     nested_form (0.3.2)
     nio4r (2.4.0)
@@ -264,6 +270,7 @@ DEPENDENCIES
   kaminari-mongoid
   less
   mongoid
+  mongoid_rails_migrations
   multi_json
   nested_form
   pundit

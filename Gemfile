@@ -71,6 +71,7 @@ gem 'roo'
 
 # MongoDB ODM Support
 gem 'mongoid'
+gem 'mongoid_rails_migrations'
 
 # Use for tree like structure in categories
 # https://github.com/benedikt/mongoid-tree
